@@ -1,0 +1,369 @@
+yii2自带压缩函数：/vendor/yiisoft/yii2-imagine/baseImage.php
+   压缩成指定尺寸，可能会失真
+
+public static function thumbnail($filename, $width, $height,
+                                 $mode = ManipulatorInterface::THUMBNAIL_OUTBOUND)
+{
+    $img = static::getImagine()->open(Yii::getAlias($filename));
+
+    $sourceBox = $img->getSize();
+    $thumbnailBox = static::getThumbnailBox($sourceBox, $width, $height);
+
+    if (($sourceBox->getWidth() <= $thumbnailBox->getWidth() && $sourceBox->getHeight() <= $thumbnailBox->getHeight()) || (!$thumbnailBox->getWidth() && !$thumbnailBox->getHeight())) {
+        return $img->copy();
+    }
+
+    $img = $img->thumbnail($thumbnailBox, $mode);
+
+    // create empty image to preserve aspect ratio of thumbnail
+    $thumb = static::getImagine()->create($thumbnailBox, new Color(static::$thumbnailBackgroundColor, static::$thumbnailBackgroundAlpha));
+
+    // calculate points
+    $startX = 0;
+    $startY = 0;
+    if ($sourceBox->getWidth() < $width) {
+        $startX = ceil($width - $sourceBox->getWidth()) / 2;
+    }
+    if ($sourceBox->getHeight() < $height) {
+        $startY = ceil($height - $sourceBox->getHeight()) / 2;
+    }
+
+    $thumb->paste($img, new Point($startX, $startY));
+
+    return $thumb;
+}
+
+//压缩成指定尺寸
+public static function thumbImages($filename,$dst_w=null,$dst_h=null,$isReservedSource=false,$scale=0.5){
+    $destination=$filename;
+    list($src_w,$src_h,$imagetype)=getimagesize($filename);
+    if(is_null($dst_w)||is_null($dst_h)){
+        $dst_w=ceil($src_w*$scale);
+        $dst_h=ceil($src_h*$scale);
+    }
+    $mime=image_type_to_mime_type($imagetype);
+    $createFun=str_replace("/", "createfrom", $mime);
+    $outFun=str_replace("/", null, $mime);
+    $src_image=$createFun($filename);
+    $dst_image=imagecreatetruecolor($dst_w, $dst_h);
+    imagecopyresampled($dst_image, $src_image, 0,0,0,0, $dst_w, $dst_h, $src_w, $src_h);
+    //image_50/sdfsdkfjkelwkerjle.jpg
+    if($destination&&!file_exists(dirname($destination))){
+        mkdir(dirname($destination),0777,true);
+    }
+    $dstFilename=$destination==null?getUniName().".".getExt($filename):$destination;
+    $outFun($dst_image,$dstFilename);
+    imagedestroy($src_image);
+    imagedestroy($dst_image);
+    if(!$isReservedSource){
+        unlink($filename);
+    }
+    return $dstFilename;
+}
+
+  //等比例压缩 最长边压成600
+    public static function CreateThumbnail($srcFile, $toFile="", $toW=600, $toH=600)
+    {
+        if ($toFile == "") $toFile = $srcFile;
+
+        $data = getimagesize($srcFile);//返回含有4个单元的数组，0-宽，1-高，2-图像类型，3-宽高的文本描述。
+        if (!$data) return false;
+        //将文件载入到资源变量im中
+        switch ($data[2]) //1-GIF，2-JPG，3-PNG
+        {
+            case 1:
+                if(!function_exists("imagecreatefromgif")) return false;
+                $im = imagecreatefromgif($srcFile);
+                break;
+            case 2:
+                if(!function_exists("imagecreatefromjpeg")) return false;
+                $im = imagecreatefromjpeg($srcFile);
+                break;
+            case 3:
+                if(!function_exists("imagecreatefrompng")) return false;
+                $im = imagecreatefrompng($srcFile);
+                break;
+        }
+        //计算缩略图的宽高
+        $srcW = imagesx($im);
+        $srcH = imagesy($im);
+        $toWH = $toW / $toH;
+        $srcWH = $srcW / $srcH;
+        if ($toWH <= $srcWH) {
+            $ftoW = $toW;
+            $ftoH = (int)($ftoW * ($srcH / $srcW));
+        } else {
+            $ftoH = $toH;
+            $ftoW = (int)($ftoH * ($srcW / $srcH));
+        }
+
+        if (function_exists("imagecreatetruecolor")) {
+            $ni = imagecreatetruecolor($ftoW, $ftoH); //新建一个真彩色图像
+            if ($ni) {
+                //重采样拷贝部分图像并调整大小 可保持较好的清晰度
+                imagecopyresampled($ni, $im, 0, 0, 0, 0, $ftoW, $ftoH, $srcW, $srcH);
+            } else {
+                //拷贝部分图像并调整大小
+                $ni = imagecreate($ftoW, $ftoH);
+                imagecopyresized($ni, $im, 0, 0, 0, 0, $ftoW, $ftoH, $srcW, $srcH);
+            }
+        } else {
+            $ni = imagecreate($ftoW, $ftoH);
+            imagecopyresized($ni, $im, 0, 0, 0, 0, $ftoW, $ftoH, $srcW, $srcH);
+        }
+
+        switch ($data[2]) //1-GIF，2-JPG，3-PNG
+        {
+            case 1:
+                imagegif($ni, $toFile);
+                break;
+            case 2:
+                imagejpeg($ni, $toFile);
+                break;
+            case 3:
+                imagepng($ni, $toFile);
+                break;
+        }
+        ImageDestroy($ni);
+        ImageDestroy($im);
+        return $toFile;
+    }
+    //等比例压缩 最短边压成300
+    public static function ProportionThumbnail($srcFile, $toFile="", $toW=300, $toH=300)
+    {
+        if ($toFile == "") $toFile = $srcFile;
+
+        $data = getimagesize($srcFile);//返回含有4个单元的数组，0-宽，1-高，2-图像类型，3-宽高的文本描述。
+        if (!$data) return false;
+        //将文件载入到资源变量im中
+        switch ($data[2]) //1-GIF，2-JPG，3-PNG
+        {
+            case 1:
+                if(!function_exists("imagecreatefromgif")) return false;
+                $im = imagecreatefromgif($srcFile);
+                break;
+            case 2:
+                if(!function_exists("imagecreatefromjpeg")) return false;
+                $im = imagecreatefromjpeg($srcFile);
+                break;
+            case 3:
+                if(!function_exists("imagecreatefrompng")) return false;
+                $im = imagecreatefrompng($srcFile);
+                break;
+        }
+        //计算缩略图的宽高
+        $srcW = imagesx($im);
+        $srcH = imagesy($im);
+        $toWH = $toW / $toH;
+        $srcWH = $srcW / $srcH;
+        if ($toWH >= $srcWH) {
+            $ftoW = $toW;
+            $ftoH = (int)($ftoW * ($srcH / $srcW));
+        } else {
+            $ftoH = $toH;
+            $ftoW = (int)($ftoH * ($srcW / $srcH));
+        }
+
+        if (function_exists("imagecreatetruecolor")) {
+            $ni = imagecreatetruecolor($ftoW, $ftoH); //新建一个真彩色图像
+            if ($ni) {
+                //重采样拷贝部分图像并调整大小 可保持较好的清晰度
+                imagecopyresampled($ni, $im, 0, 0, 0, 0, $ftoW, $ftoH, $srcW, $srcH);
+            } else {
+                //拷贝部分图像并调整大小
+                $ni = imagecreate($ftoW, $ftoH);
+                imagecopyresized($ni, $im, 0, 0, 0, 0, $ftoW, $ftoH, $srcW, $srcH);
+            }
+        } else {
+            $ni = imagecreate($ftoW, $ftoH);
+            imagecopyresized($ni, $im, 0, 0, 0, 0, $ftoW, $ftoH, $srcW, $srcH);
+        }
+
+        switch ($data[2]) //1-GIF，2-JPG，3-PNG
+        {
+            case 1:
+                imagegif($ni, $toFile);
+                break;
+            case 2:
+                imagejpeg($ni, $toFile);
+                break;
+            case 3:
+                imagepng($ni, $toFile);
+                break;
+        }
+        ImageDestroy($ni);
+        ImageDestroy($im);
+        return $toFile;
+    }
+
+
+    //截取图片中间的函数；
+    public static function thumbMiddle($filelj,$width=300,$height=300){
+        $suijishu = rand(100,999);                            //取一个100--999的随机数；
+        $xfilej=time().$suijishu.substr($filelj,7,200);
+        $fileljp=$filelj;//图片路径，根据实际情况修改，要相对路径!!!!!!!!!!!!!
+        $image=$fileljp;//图片路径
+        $img=getimagesize($image);//载入图片的函数   得到图片的信息
+        switch($img[2]){//判断图片的类型
+            case 1:
+                $im=@imagecreatefromgif($image);//载入图片，创建新图片
+                break;
+            case 2:
+                $im=@imagecreatefromjpeg($image);
+                break;
+            case 3:
+                $im=@imagecreatefrompng($image);
+                break;
+        }
+        $width_y=$img[0];
+        $height_y=$img[1];
+        if($width_y>$height_y){//如果宽大于高
+            $width_y_y=$height_y;
+            $height_y_y=$height_y;
+            $jq_x=($width_y-$height_y)/2;
+            $jq_y=0;
+        }else if($width_y<$height_y){//如果宽小于高
+            $height_y_y=$width_y;
+            $width_y_y=$width_y;
+            $jq_x=0;
+            $jq_y=($height_y-$width_y)/2;
+        }else if($width_y=$height_y){//如果宽小于高
+            $width_y_y=$width_y;
+            $height_y_y=$height_y;
+            $jq_x=0;
+            $jq_y=0;
+        }
+        $newim=imagecreatetruecolor($width,$height); //剪切图片第一步，建立新图像 x就是宽 ，y就是高//图片大小
+        imagecopyresampled($newim,$im,0,0,$jq_x,$jq_y,$width,$height,$width_y_y,$height_y_y);//这个函数不失真
+//        imagejpeg($newim, "../grouppic/".$xfilej, 100);//加个100可以更清晰
+       imagejpeg($newim, $filelj, 100);//加个100可以更清晰
+        //截取图片       此处为调用页面的grouppic文件的相对路径
+        return $filelj;//返回因为绝对路径
+    }
+
+
+函数的使用/在yii2中
+/**
+ *
+ * @param string $str
+ * 前缀名字
+ * @param number $type
+ * 类型  1是返回全部路径  2是返回文件名
+ * @return string|boolean
+ */
+public function uploads($str="ck",$type=1)
+{
+    if ($this->validate()) {
+        if($type == 1){
+            $realpath = "/uploads/".$str.time().uniqid().".".$this->imageFile->extension;
+            $savepath = ".".$realpath;
+            $this->imageFile->saveAs($savepath);
+            ThumbImage::CreateThumbnail($savepath);
+            return $realpath;
+        }else {
+            $realpath = "/img/upload/";
+            $img_name = $str.time().uniqid().".".$this->imageFile->extension;
+            $savepath = ".".$realpath.$img_name;
+            $this->imageFile->saveAs($savepath);
+            ThumbImage::CreateThumbnail($savepath);
+            return $img_name;
+        }
+
+    } else {
+        return false;
+    }
+}
+
+  public function uploadBankcard($str='bankcard')
+    {
+        if ($this->validate()) {
+
+
+            if ($_FILES['bank']['size']['img'] > 300000) {
+                echo "<font color=\"red\"size=\"8\">*文件过大（必须小于
+300KB）</font>";
+                return;
+            }
+
+            $realpath = "/uploads/".$str.time().uniqid().".".$this->imageFile->extension;
+            $savepath = ".".$realpath;
+            $this->imageFile->saveAs($savepath);
+            return $realpath;
+        } else {
+            return false;
+        }
+    }
+
+
+public function uploadAvatar($str='tx')
+{
+    if ($this->validate()) {
+        $realpath = "/img/upload/".$str.time().uniqid().".".$this->imageFile->extension;
+        $savepath = ".".$realpath;
+        $this->imageFile->saveAs($savepath);
+        ThumbImage::ProportionThumbnail($savepath);
+        ThumbImage::thumbMiddle($savepath);
+        return $realpath;
+    } else {
+        return false;
+    }
+}
+
+
+
+不变形截图
+<?php
+function my_image_resize($src_file, $dst_file , $new_width , $new_height)
+{
+    $src_img=imagecreatefromjpeg($src_file);
+    $w=imagesx($src_img);
+    $h=imagesy($src_img);
+    $ratio_w=1.0 * $new_width / $w;
+    $ratio_h=1.0 * $new_height / $h;
+    $ratio=1.0;
+    // 生成的图像的高宽比原来的都小，或都大 ，原则是 取大比例放大，取大比例缩小（缩小的比例就比较小了）
+    if( ($ratio_w < 1 && $ratio_h < 1) || ($ratio_w > 1 && $ratio_h > 1))
+    {
+        if($ratio_w < $ratio_h)
+        {
+            $ratio = $ratio_h ; // 情况一，宽度的比例比高度方向的小，按照高度的比例标准来裁剪或放大
+        }else {
+            $ratio = $ratio_w ;
+        }
+        // 定义一个中间的临时图像，该图像的宽高比 正好满足目标要求
+        $inter_w=(int)($new_width / $ratio);
+        $inter_h=(int) ($new_height / $ratio);
+        $inter_img=imagecreatetruecolor($inter_w , $inter_h);
+        imagecopy($inter_img, $src_img, 0,0,0,0,$inter_w,$inter_h);
+        // 生成一个以最大边长度为大小的是目标图像$ratio比例的临时图像
+        // 定义一个新的图像
+        $new_img=imagecreatetruecolor($new_width,$new_height);
+        imagecopyresampled($new_img,$inter_img,0,0,0,0,$new_width,$new_height,$inter_w,$inter_h);
+        //imagejpeg($new_img, $dst_file,100); // 存储图像
+    }
+    // end if 1
+    // 2 目标图像 的一个边大于原图，一个边小于原图 ，先放大平普图像，然后裁剪
+    //if( ($ratio_w < 1 && $ratio_h > 1) || ($ratio_w >1 && $ratio_h <1) )
+    else
+    {
+        $ratio=$ratio_h>$ratio_w? $ratio_h : $ratio_w; //取比例大的那个值
+        // 定义一个中间的大图像，该图像的高或宽和目标图像相等，然后对原图放大
+        $inter_w=(int)($w * $ratio);
+        $inter_h=(int) ($h * $ratio);
+ 
+        $inter_img=imagecreatetruecolor($inter_w , $inter_h);
+        //将原图缩放比例后裁剪
+        imagecopyresampled($inter_img,$src_img,0,0,0,0,$inter_w,$inter_h,$w,$h);
+        // 定义一个新的图像
+        $new_img=imagecreatetruecolor($new_width,$new_height);
+        imagecopy($new_img, $inter_img, 0,0,0,0,$new_width,$new_height);
+    }
+    imagejpeg($new_img, $dst_file,100); // 存储图像
+}
+ 
+$filename = "110.jpg"; //原图片的路径
+$fileto="120.jpg";//截图后保存的路径
+$new_w=300;//设定的宽
+$new_h=350; //设定的高
+my_image_resize($filename,$fileto,$new_w,$new_h);
+?>

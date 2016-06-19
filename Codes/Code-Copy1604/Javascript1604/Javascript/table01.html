@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>table01</title>
+    <script>
+        function addhero(){
+            var no=document.getElementById('no').value;
+            var heroname=document.getElementById('heroname').value;
+            var nickname=document.getElementById('nickname').value;
+            var mytab=document.getElementById('mytab');
+            for(var i=0;i<mytab.rows.length;i++){
+                if(mytab.rows[i].cells[0].innerHTML==no){
+                    window.alert("编号重复");
+                    return false;
+                }
+            }
+            var tableRow=mytab.insertRow(mytab.rows.length);
+            tableRow.insertCell(0).innerHTML=no;
+            tableRow.insertCell(1).innerHTML=heroname;
+            tableRow.insertCell(2).innerHTML=nickname;
+            tableRow.insertCell(3).innerHTML="<a href='#' onclick='abc('"+no+"')'>删除用户</a>"
+        }
+    </script>
+</head>
+<body>
+<table id="mytab" border="1px">
+<tr><td>排名</td><td>姓名</td><td>外号</td><td>删除</td></tr> </table>
+<h1>请输入英雄的信息</h1>
+排名<input type="text" id="no" name="no"/><br/>
+名字<input type="text" id="heroname" name="heroname" /><br/>
+ 外号<input type="text" id="nickname" name="nickname" /><br/>
+ <input type="button" onclick="addhero()" value="添加"/>
+</body>
+</html>

@@ -1,0 +1,122 @@
+{% block content %}
+    {#author:suhang #}
+    {#date:2016-05-06#}
+    <style type="text/css">
+
+        #container {
+            width: 100%;
+            height: 550px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .info-title {
+            color: white;
+            font-size: 14px;
+            background-color: blue;
+            line-height: 26px;
+            padding: 0 0 0 6px;
+            font-weight: lighter;
+            letter-spacing: 1px;
+        }
+
+        .info-content {
+            padding: 4px;
+            color: #666666;
+            line-height: 23px;
+            font: 12px Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial;
+        }
+
+        .info-content img {
+            float: left;
+            margin: 3px;
+        }
+
+
+    </style>
+
+    <div id="datatable_orders_wrapper" class="dataTables_wrapper dataTables_extended_wrapper no-footer">
+        <div class="table-scrollable">
+
+
+            <div id="container"></div>
+            <div id="pos">
+                <b>鼠标左键在地图上单击获取坐标</b>
+                <br>
+                <div>
+                    X：<input type="text" id="lngX" name="lngX" size=8 value=""/>&nbsp;
+                    Y：<input type="text" id="latY" name="latY" size=8 value=""/>&nbsp;
+                    名称：<input type="text" id="unit_name" size=10 name="unit_name" maxlength="64" value=""/>&nbsp;
+                    地址：<input type="text" id="address" name="address" maxlength="96" value=""/>&nbsp;
+                    电话：<input type="text" id="tel" name="tel" size=8 maxlength="64" value=""/>&nbsp;
+                    类型：<input type="text" id="unit_type" name="unit_type" size=12 maxlength="64" value=""/>&nbsp;
+                    <input type="button" value="保　存" onclick="savePoi();"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block  footerJs %}
+
+    <script src="http://webapi.amap.com/maps?v=1.3&key=e1e5e418d6b2972415cde2a02e7cd1e0&plugin=AMap.PlaceSearch,AMap.AdvancedInfoWindow"></script>
+
+    <script>
+        var map = new AMap.Map('container', {
+            resizeEnable: true,
+            center: [116.397428, 39.90923],
+            zoom: 13,
+            isHotspot: true
+        });
+        var placeSearch = new AMap.PlaceSearch();  //构造地点查询类
+        var infoWindow = new AMap.AdvancedInfoWindow({});
+        map.on('hotspotclick', function (result) {
+            placeSearch.getDetails(result.id, function (status, result) {
+                if (status === 'complete' && result.info === 'OK') {
+                    placeSearch_CallBack(result);
+                }
+            });
+        });
+
+        //获取经纬度
+        map.on('click', function (e) {
+//            alert('您在[ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ]的位置点击了地图123！');
+            var lngX = document.getElementById('lngX');
+            var latY = document.getElementById('latY');
+            lngX.value = e.lnglat.getLng();
+            latY.value = e.lnglat.getLat();
+        });
+        //回调函数
+        function placeSearch_CallBack(data) { //infoWindow.open(map, result.lnglat);
+            var poiArr = data.poiList.pois;
+            var location = poiArr[0].location;
+            infoWindow.setContent(createContent(poiArr[0]));
+            infoWindow.open(map, location);
+        }
+        function createContent(poi) {  //信息窗体内容
+            var s = [];
+            s.push('<div class="info-title">' + poi.name + '</div><div class="info-content">' + "地址：" + poi.address);
+            s.push("电话：" + poi.tel);
+            s.push("类型：" + poi.type);
+            s.push('<div>');
+
+            document.getElementById("unit_name").value = poi.name;
+            document.getElementById("address").value = poi.address;
+            document.getElementById("tel").value = poi.tel;
+            document.getElementById("unit_type").value = poi.type;
+            return s.join("<br>");
+        }
+
+        function savePoi() {
+            document.getElementById('center_area').textContent = document.getElementById("unit_name").value;
+            $('#gaodeMap').css('display', 'none');
+        }
+    </script>
+
+
+
+
+{% endblock %}

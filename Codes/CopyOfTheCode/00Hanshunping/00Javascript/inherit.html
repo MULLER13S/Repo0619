@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+     function Stu(name,age) {
+         this.name = name;
+         this.age = age;
+         this.show = function () {
+             window.alert(this.name + "46 " + this.age);
+         }
+     }
+     function MidStu(name,age){
+         this.stu=Stu;
+         this.stu(name,age);}//JS中实际上是通过对象冒充来实现继承，这句话不可少
+         // MidStu可以覆盖Stu父类的show方法 this.show=function(){ window.alert("hello");
+         //
+         //
+         var midStu=new MidStu("顺平",32);
+        midStu.show(); //这里调用的是子方法
+</script>
+</body>
+</html>

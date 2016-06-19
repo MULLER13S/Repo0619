@@ -1,0 +1,21 @@
+<?php
+$enabled=false;
+$duration=30;
+$dependency=[
+  'class'=>'yii\caching\FileDependency',
+    'fileName'=>'hw.txt'
+];
+?>
+
+<?php if($this->beginCache('cache',['duration'=>$duration,'dependency'=>$dependency])){
+    ?>
+
+
+
+
+
+<div id="cache">ye3</div>
+<?php $this->endCache();
+}
+?>
+<div id="cache1">no465</div>

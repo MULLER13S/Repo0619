@@ -1,0 +1,12 @@
+
+tr:nth-child(odd) {
+    background-color: red;
+}tr:nth-child(even) {
+    background-color: transparent;
+}
+th {background-color: transparent}
+
+tr:hover {
+    background-color: yellow;
+    font-weight: bolder;
+}

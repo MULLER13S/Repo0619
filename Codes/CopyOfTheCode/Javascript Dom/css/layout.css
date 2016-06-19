@@ -1,0 +1,13 @@
+#imageGallery {
+    list-style: none;
+}
+#imageGallery li {
+    display: inline;
+}
+#slideShow {
+    width:100px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+
+}

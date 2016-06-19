@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html style="width:100%;height:100%;">
+	<head>
+		<meta charset="utf-8">
+		<title>JS API公开课</title>
+	</head>
+	<body style="width:100%;height:100%;margin:0;">
+		<div id="map" style="width:100%;height:100%;"></div>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=b79caad469676224a0e32143ce5add02"></script>
+		<script type="text/javascript">
+			(function(){
+				var map = new AMap.Map('map');
+				map.plugin(['AMap.Driving'], function(){
+					var driving = new AMap.Driving({
+						policy:AMap.DrivingPolicy.LEAST_TIME
+					});
+					driving.search(new AMap.LngLat(116.379018,39.805626),new AMap.LngLat(116.42732,39.903752));
+					AMap.event.addListener(driving, 'complete', function(e){
+						if(e.info === 'OK'){
+							var steps = e.routes[0].steps;
+							addMarker(steps[0].path[0]);
+							for(var i = 0; i <steps.length; i++){
+								// Ctrl + F12 查看控制台打印的信息
+								drawLine(steps[i].path, map);
+								console.log(steps[i].instruction);
+							}
+							map.setZoom(12);
+						}
+					});
+				});
+				
+				
+				//dram line
+				function drawLine(data, map) {
+					var polyline = new AMap.Polyline({
+						map: map,
+						path: data,
+						strokeColor: "red",
+						strokeOpacity: 0.9,
+						strokeWeight: 4,
+						strokeDasharray: [10, 5]
+					});
+				}
+				// add start & end point
+				function addMarker(position){
+					var mk = new AMap.Marker({
+						map: map,
+						position: position
+					});
+				}
+				
+			})();
+		</script>
+	</body>
+</html>

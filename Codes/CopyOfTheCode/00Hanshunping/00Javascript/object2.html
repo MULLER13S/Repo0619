@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var abc=89;
+    function test(){
+        //不带var，表示用的全局变量abc；
+          abc=456;
+    }
+    test();
+    document.write(abc);
+    function Person(){}
+    var a=new Person();
+    a.age=10;
+    a.name='small kate22';
+    var b=a;
+    b=null;
+    delete a.age;
+    document.write(b.name);
+    document.write('123'+a.age);
+</script>
+</body>
+</html>

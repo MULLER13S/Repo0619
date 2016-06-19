@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tank</title>
+    <script>
+        function Wall(){ }
+        function Bullet(){ }
+        function Water(){  }
+        function Hero(x,y) {
+            this.x = x;
+            this.y = y;
+            this.speed = 1;
+            this.direct = 0;
+//                0 -》上 1->右 2->下 3->左 
+            this.move_up=function() {
+                this.y -= this.speed;
+                myhero.style.backgroundPositionY="0px";  
+                 myhero.style.top=this.y+"px";
+            }
+            this.move_down=function() {
+                this.y += this.speed;
+                myhero.style.backgroundPositionY="80px"; 
+                  myhero.style.top=this.y+"px";
+            }
+            this.move_left=function(){
+                this.x-=this.speed;  
+                 myhero.style.backgroundPositionY="40px";
+                myhero.style.left=this.x+"px";
+            }
+            this.move_right=function(){ 
+                  this.x+=this.speed;
+                myhero.style.backgroundPositionY="120px"; 
+                myhero.style.left=this.x+"px"; 
+             }
+        }
+        var hero=new Hero(100,250);
+        function sendCommand(){
+            switch(window.event.keyCode){
+                case 65:   
+                      hero.move_left();
+                    break;   
+                 case 68:
+                     hero.move_right();   
+                      break;
+                case 83:  
+                       hero.move_down();   
+                      break;
+                case 87: 
+                    hero.move_up(); 
+                     break;
+                case 74:
+                    hero.fire();
+                    break;    
+                default:     
+                    break;
+            }
+
+            }
+
+    </script>
+</head>
+<body onkeydown="sendCommand()">
+<div style="width:400px;height:300px;background-color:black;
+position:absolute">
+    <div id="myhero"style="background-image:url('image/itank.jpg');
+    background-position-y:0;
+    width:40px;height:40px;left:100px;
+    top:250px;position:absolute"></div>
+</div>
+
+</body>
+</html>

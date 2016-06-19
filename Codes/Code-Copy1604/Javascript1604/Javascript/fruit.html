@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fruit</title>
+</head>
+<body>
+<h1>请选择你喜欢的水果</h1> 
+<input type="checkbox" onclick="shop(this,10)"  name="fruits" value="10">苹果 10<br/>
+<input type="checkbox" onclick="shop(this,20)"  name="fruits" value="20">西瓜 20<br/>
+<input type="checkbox" onclick="shop(this,30)"  name="fruits" value="30">香蕉 30<br/>
+<input type="checkbox" onclick="shop(this,40)"  name="fruits" value="40">葡萄 40<br/>
+<input type="checkbox" onclick="shop(this,50)"  name="fruits" value="50">桃 50<br/>
+<span id="showres"></span>
+</body>
+</html>
+<script>
+    var allPrice=0;
+    function shop(obj,value){
+
+        if(obj.checked){
+            allPrice+=parseInt(obj.value);   }
+        else{        allPrice-=parseInt(obj.value);   }
+        showres.innerText=allPrice;  
+
+    }
+</script>

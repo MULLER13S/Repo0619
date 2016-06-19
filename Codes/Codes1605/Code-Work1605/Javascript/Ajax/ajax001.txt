@@ -1,0 +1,58 @@
+ <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+
+
+
+        $(function(){
+            $("#hidden").load(function(){
+                var wnd = this.contentWindow;
+                var str = $(wnd.document.body).html();
+                callback(str);
+            });
+        });
+
+        function callback(info){
+            var a=document.getElementById('ajax');
+            a.innerHTML=info;
+
+
+
+        }
+    </script>
+
+
+    <script>
+        function showHint(str)
+        {
+
+            var xmlhttp;
+            if (str.length==0)
+            {
+                document.getElementById("hintType").innerHTML="";
+                return;
+            }
+
+
+            if (window.XMLHttpRequest)
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {// code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function()
+            {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                    document.getElementById("hintType").innerHTML=xmlhttp.responseText;
+                }
+            }
+
+            xmlhttp.open("GET","/site/user/readbankdetail?q="+str,true);
+
+            xmlhttp.send();
+
+
+        }
+    </script>

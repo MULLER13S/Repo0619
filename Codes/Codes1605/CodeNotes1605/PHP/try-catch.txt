@@ -1,0 +1,22 @@
+<?php
+try{//执行
+    addUser("小明");//如果这里异常，下面的代码将不会被执行，所以下面的语句异常，也不会显示错误信息了
+    updateUser("小王");
+}
+catch(Exception $e){// $e是系统已经定义好的类
+    echo "失败信息：".$e->getMessage();//获取错误信息
+}
+
+function addUser($name){
+    if($name=="小小"){
+    }else{
+        throw new Exception("添加失败");//抛出错误信息
+    }
+}
+function updateUser($name){
+    if($name=="小王"){
+    }else{
+        throw new Exception("修改失败");//抛出错误信息
+    }
+}
+?>

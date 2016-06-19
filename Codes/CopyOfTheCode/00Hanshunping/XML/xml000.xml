@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE note [
+        <!ELEMENT note (stu,name,stu,body)>
+        <!ELEMENT stu (#PCDATA)>
+        <!ELEMENT name (#PCDATA)>
+        <!ELEMENT heading (#PCDATA)>
+        <!ELEMENT body (#PCDATA)>
+        ]>
+<note>
+<stu>
+    <name>孙悟空</name>
+    <sex>男</sex>
+    <age>500</age>
+    <male></male>
+    <intro><![CDATA[#&**&<>?]]></intro>
+
+</stu>
+<stu>
+    <name>白骨精</name>
+    <sex>女</sex>
+    <age>100</age>
+</stu>
+</note>

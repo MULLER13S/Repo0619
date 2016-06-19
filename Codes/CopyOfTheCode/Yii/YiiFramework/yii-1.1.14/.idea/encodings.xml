@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/shop/protected/components/Pagination.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop/protected/controllers/GoodsController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop/protected/models/Goods.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop/protected/modules/backend09/controllers/GoodsController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop/protected/modules/backend09/views/goods/add.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop/protected/modules/backend09/views/goods/show.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop/protected/modules/backend09/views/goods/update.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop/protected/modules/backend09/views/index/head.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop/protected/modules/backend09/views/index/index.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop/protected/modules/backend09/views/index/left.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop/protected/modules/backend09/views/index/right.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop/protected/modules/backend09/views/manager/login.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop/protected/views/goods/category.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop/protected/views/goods/detail.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop/protected/views/index/index.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop/protected/views/user/login.php" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

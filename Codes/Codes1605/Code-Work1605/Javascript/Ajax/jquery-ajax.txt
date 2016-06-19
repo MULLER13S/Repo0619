@@ -1,0 +1,59 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#send").click(function(){
+                var cont = $("input").serialize();
+                $.ajax({
+                    url:'ab.php',
+                    type:'post',
+                    dataType:'json',
+                    data:cont,
+                    success:function(data){
+                        var str = data.username + data.age + data.job;
+                        $("#result").html(str);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="result">一会看显示结果</div>
+<form id="my" action="" method="post">
+    <p><span>姓名：</span> <input type="text" name="username" /></p>
+    <p><span>年龄：</span><input type="text" name="age" /></p>
+    <p><span>工作：</span><input type="text" name="job" /></p>
+</form>
+<button id="send">提交</button>
+</body>
+</html>
+
+ab.php页面
+<?php
+header("Content-type:text/html;charset=utf-8");
+$username = $_POST['username'];
+$age = $_POST['age'];
+$job = $_POST['job'];
+$json_arr = array("username"=>$username,"age"=>$age,"job"=>$job);
+$json_obj = json_encode($json_arr);
+echo $json_obj;
+?>
+
+使用post方式
+
+<script type="text/javascript">
+ $(function(){
+  $("#send").click(function(){
+      var cont = {username:$("input")[0].value,age:$("input")[1].value,job:$("input")[2].value};
+      var url = 'ab.php';
+      $.post(url,cont,function(data){
+       var res = eval("(" + data + ")");//转为Object对象
+      var str = res.username + res.age + res.job;
+    $("#result").html(str);
+   });
+  });  
+ });
+</script>

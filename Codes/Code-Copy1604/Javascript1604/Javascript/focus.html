@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>focus</title>
+    <script>
+        function setFocus() {
+            document.getElementById("text1").focus();
+        }
+    </script>
+</head>
+<body>
+<form> 
+    name:<input type="text" id="text1" />
+     age: <input type="text" id="text2" /> <br /> 
+    <input type="button" onclick="setFocus()" value="Set focus" /> 
+    <input type="button" onclick="loseFocus()" value="Lose focus" /> </form>
+</body>
+</html>

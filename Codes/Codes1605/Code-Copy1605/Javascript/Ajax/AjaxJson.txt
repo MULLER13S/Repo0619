@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="action.php"  enctype="multipart/form-data" id="f">
+    <input type="text" name="username"  id="name">
+    <input type="text" name="password" id="pass" >
+    <input type="file" name="img" id="img">
+    <input type="button" value="submit" id="wait" onclick="post()">
+</form>
+
+<div style="height: 88px;"></div>
+<span id="ajax"><h2>tuesday</h2></span>
+<span id="ajax2"><h2>saturday</h2></span>
+</body>
+
+<script src="jquery-1.4.4.min.js"></script>
+<script src="ajaxfileupload.js"></script>
+
+<script type="text/javascript">
+    function post(){
+        $.ajaxFileUpload
+        (
+                {
+                    url:'action.php',
+                    secureuri:false,
+                    fileElementId:'img',
+                    dataType: 'json',
+//				data:{name:'logan', id:'id'},
+                    success: function (data, status)
+                    {
+
+                        if(typeof(data.error) != 'undefined')
+                        {
+                            if(data.error == '')
+                            {
+                                alert(data.error);
+                            }else
+                            {
+                                alert(data.msg);
+                                $("#name").val('hello');
+                                $("#ajax").html("<input type='text' value='sunshine' />");
+                                $("#ajax2").html(data.msg);
+
+                                time();
+//                                document.getElementById("wait").setAttribute("disabled",true);
+
+                            }
+                        }
+                    },
+                    error: function (data, status, e)
+                    {
+                        alert(e);
+                    }
+                }
+        )
+    }
+
+    var wait=3;
+    function time() {
+
+        if (wait == 0) {
+            document.getElementById("wait").removeAttribute("disabled");
+            document.getElementById("wait").value="确定上传";
+            wait =3;
+        } else {
+            document.getElementById("wait").setAttribute("disabled", true);
+            document.getElementById("wait").value=wait+"s重新上传";
+            wait--;
+            setTimeout(function() {
+                        time()
+                    },
+                    1000)
+        }
+    }
+
+</script>
+
+
+</html>

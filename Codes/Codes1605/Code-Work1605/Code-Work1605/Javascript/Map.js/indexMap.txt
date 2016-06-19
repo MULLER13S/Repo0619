@@ -1,0 +1,13 @@
+{#高德地图模块#}
+    <div id="gaodeMap" style="display: none;">
+        {% block map %}{% include "@app/modules/ad/views/publish/map.twig" %}{% endblock %}
+    </div>
+
+    {#地图定位#}
+    <script>
+        function locatePos() {
+            $('#gaodeMap').css('display', 'block');
+
+        }
+
+    </script>

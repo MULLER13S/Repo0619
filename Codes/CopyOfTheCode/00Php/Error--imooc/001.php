@@ -1,0 +1,2 @@
+<?php
+settype($a,'king');

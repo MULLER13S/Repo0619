@@ -1,0 +1,20 @@
+function GetRowNo() {
+        var table=document.getElementById('table');
+        var name =document.getElementById('name1');
+        var idNo =document.getElementById('idNo1');
+        var e = e || window.event;
+        var target = e.target || e.srcElement;
+
+        if (target.parentNode.tagName.toLowerCase() == "td") {
+            rowIndex = target.parentNode.parentNode.rowIndex;
+
+        }
+
+        var content;
+        content=table.rows[rowIndex].cells[3].innerText;
+        var num=table.rows[rowIndex].cells[4].innerText;
+
+        name.value=content;
+        idNo.value=num;
+
+    }

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form</title>
+    <script>
+        function check(){
+            var form = document.forms.item(0);
+            var name=form.username.value;
+            var passwd=form.passwd.value;
+            var passwd2=form.passwd2.value;
+            if(name.length<4 || name.length>6){
+                error1.style.display="inline";     
+                return false;
+            }
+            if(passwd!=passwd2){
+                error2.innerText="两次密码不一致";
+                error2.style.display="inline"; 
+                return false;
+                
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>用户注册</h1>
+
+<form action="">
+    <table border="0">
+        <tr>
+            <td>用户 名:</td>
+            <td class="style2">
+                <input class="style1" type="text" id="username" name="username"/>
+    <span style="display: none;color: red;
+    font-size: 10px" id="error1">用户名必须在4-6位间</span></td>
+        </tr>
+        <tr>
+            <td>密 码:</td>
+            <td><input class="style1" type="password" name="passwd" id="passwd"/></td>
+        </tr>
+        <tr>
+            <td>确认密码</td>
+            <td><input class="style1" type="password" name="passwd2" id="passwd2"/>
+                <span style="display: inline;color: red;" id="error2"></span></td>
+        </tr>
+        <tr>
+            <td>年 龄</td>
+            <td><input class="style1" type="text" name="age" id="age"/></td>
+        </tr>
+        <tr>
+            <td>电子邮件</td>
+            <td><input class="style1" type="text" name="email" id="email"/></td>
+        </tr>
+        <tr>
+            <td>电话号码</td>
+            <td><input class="style1" type="text" name="phone" id="phone"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" onclick="return check();" value="注册用户"></td>
+            <td><input type="reset" value="重新填写"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

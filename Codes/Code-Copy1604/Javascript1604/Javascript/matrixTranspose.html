@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>001</title>
+
+    <script>
+       var old=[[35,4,8,69],[36,95,123,78],[42,29,11,300]];
+       document.write(old.length+"<br/>");
+//        for(var i=0;i<old.length;i++){
+//            for(var j=0;j<old[i].length;j++){
+//                document.writeln(old[i][j]);
+//            }
+//            document.writeln("<br/>");
+//        }
+       var newArr=[];
+       //先初始化
+       for(var i=0;i<old[0].length;i++){
+           newArr[i]=[];
+       }
+       for(var m=0;m<old.length;m++){
+           for(var k=0;k<old[m].length;k++){
+               newArr[k][m]=old[m][k];
+           }
+
+       }
+       for(var n=0;n<newArr.length;n++){
+           for(var p=0;p<newArr[n].length;p++){
+               document.writeln(newArr[n][p]);
+           }
+           document.writeln("<br/>");
+       }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

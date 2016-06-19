@@ -1,0 +1,73 @@
+<script>
+    //切换包类型
+    function switchType() {
+        var str = document.getElementById("adType").value;
+        var xmlhttp;
+        if (str.length == 0) {
+            document.getElementById("ajax").innerHTML = "";
+            return;
+        }
+
+
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                var content=xmlhttp.responseText;
+//                    转换为对象
+                content = eval("(" + content + ")");
+
+//                    content=content.split(',');
+//                    document.getElementById("packetCategory").innerHTML = xmlhttp.responseText[0];
+                document.getElementById("packetCategory").innerHTML = content.type;
+//                    document.getElementById("switchTemplate").innerHTML = xmlhttp.responseText[1];
+                document.getElementById("switchTemplate").innerHTML = content.template;
+
+            }
+        }
+
+        xmlhttp.open("GET", "/ad/publish/switchtype?q=" + str, true);
+
+        xmlhttp.send();
+
+
+    }
+</script>
+
+
+
+
+-------------------------------php--------------------------------------------
+
+//切换类型
+    public function actionSwitchtype(){
+        $q=$_GET['q'];
+
+        
+        $adType=$this->render('adtype.twig');
+        $adTemplate=$this->render('adMarket.twig');
+        $taskType=$this->render('tasktype.twig');
+        $taskTemplate=$this->render('taskMarket.twig');
+
+        if($q=='adPacket'){
+            $result = array(
+                'type' => $adType,
+                'template' => $adTemplate
+
+            );
+        }else{
+            $result = array(
+                'type' => $taskType,
+                'template' => $taskTemplate
+
+            );
+        }
+
+        echo json_encode($result);
+
+    }

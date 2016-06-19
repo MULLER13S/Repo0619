@@ -1,0 +1,8 @@
+<?php
+//H:/Xmp/123.jpgÒ²¿ÉÒÔ£»
+if(!copy("H:\\Xmp\\123.jpg","I:\\abc22.jpg")){
+    echo "fail";
+}
+else{
+    echo "ok";
+}

@@ -1,0 +1,25 @@
+ //添加数据；
+public function actionAdd(){
+        $test=new Test();
+        $test->id=5;
+        $test->title='tit1234';
+        $test->validate();
+        if($test->hasErrors()){
+             print_r($test->errors);
+            die;
+        }
+        $test->save();
+    }
+   //更新数据；
+public function actionUpdate(){
+        $test=Test::find()->where(['id'=>4])->one();
+        $test->title='march22';
+        $test->validate();
+        if($test->hasErrors()){
+            print_r($test->errors);
+            die;
+        }
+        $test->save();
+
+    }
+    

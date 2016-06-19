@@ -1,0 +1,4 @@
+<select name="pageselect" onchange="self.location.href=options[selectedIndex].value" >
+        <option value="/ad/publish/edit" selected>广告包</option>
+        <option value="/ad/publish/adtwo">任务包</option>
+    </select>

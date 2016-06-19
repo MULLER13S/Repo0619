@@ -1,0 +1,274 @@
+{% extends "@app/modules/layouts/test.twig" %}
+{% block content %}
+    <div class="container rel">
+        <div class="row">
+            <p class="plr-15 fn-6 f-lg mt-15">三重安全机制认证</p>
+            <div class="text-center">
+                <img src="/CDN/img/z3.png"  class="whi-35">
+            </div>
+            <div class="text-center">
+                <img src="/CDN/img/yinhangbangding.png"  class="wh-120">
+            </div>
+        </div>
+
+        <form enctype="multipart/form-data" action="/site/user/readbankno" method="post" target="hidden" >
+
+            <div class="zzzz pos" style="background: url('/CDN/img/xiangji.png') no-repeat;background-size: 100% 100%; ">
+                <input type="file" name="bankPhoto" id="bankImg" class="fileInput weui_uploader_input"  accept="image/*"  onchange="fileChange(this);"/>
+            </div>
+
+
+        </form>
+    </div>
+
+    <form  action="/site/user/finalvalidate" method="post" >
+        <div class="weui_cells weui_cells_form">
+            <div class="weui_cell ptm">
+                <div class="weui_cell_hd"><span class="weui_label wh-4">银行卡号</span></div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <span id="ajax"><input class="weui_input" id="bankNumber" type="number" name="bankNumber" pattern="[0-9]*"  onkeyup="showHint()"
+                                           onmouseleave="showHint()" onchange="showHint()"/></span>
+                </div>
+                <div class="weui_cell_ft">
+
+                </div>
+            </div>
+
+            <div class="weui_cell ptm">
+                <div class="weui_cell_hd"><span class="weui_label wh-4 col2">银行类型</span></div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <span id="hintType">
+                    <input class="weui_input" type="text" name="bank_type" id="bankType" placeholder="">
+                        </span>
+                </div>
+            </div>
+        </div>
+        <input type="text" name="name" readonly="readonly" value="{{ name }}">
+        <input type="text" name="id" readonly="readonly" value="{{ id }}">
+        {#<input type="text" name="name" readonly="readonly" value="成文韬">#}
+        {#<input type="text" name="id" readonly="readonly" value="71">#}
+
+        <div class="container">
+            <input type="button" id="wait" value="确定上传" onclick="post()" class="btn btn-default btn-lg btn-block org " />
+        </div>
+        <div class="container">
+            <button id="btn_pay"  type="submit" class="btn btn-default btn-lg btn-block org">
+                下一步
+            </button>
+        </div>
+    </form>
+
+
+
+
+    <div style="height: 40px;"></div>
+
+
+
+
+
+
+    <iframe id='hidden' name='hidden' style="display:none;"></iframe>
+
+    <script type="text/javascript">
+
+        var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+        function fileChange(target,id) {
+            var fileSize = 0;
+            var filetypes =[".jpg",".png",".jpeg"];
+            var filepath = target.value;
+            var filemaxsize = 300;//300KB
+            if(filepath){
+                var isnext = false;
+                var fileend = filepath.substring(filepath.indexOf("."));
+                if(filetypes && filetypes.length>0){
+                    for(var i =0; i<filetypes.length;i++){
+                        if(filetypes[i]==fileend){
+                            isnext = true;
+                            break;
+                        }
+                    }
+                }
+                if(!isnext){
+                    alert("不接受此文件类型！请选择jpg,png,jpeg格式");
+                    target.value ="";
+                    return false;
+                }
+            }else{
+                return false;
+            }
+            if (isIE && !target.files) {
+                var filePath = target.value;
+                var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
+                if(!fileSystem.FileExists(filePath)){
+                    alert("附件不存在，请重新输入！");
+                    return false;
+                }
+                var file = fileSystem.GetFile (filePath);
+                fileSize = file.Size;
+            } else {
+                fileSize = target.files[0].size;
+            }
+
+            var size = fileSize / 1024;
+            if(size>filemaxsize){
+                alert("附件大小不能大于"+filemaxsize+"KB！");
+                target.value ="";
+                return false;
+            }
+            if(size<=0){
+                alert("附件大小不能为0KB！");
+                target.value ="";
+                return false;
+            }
+        }
+
+        function file()
+        {
+            document.getElementById("btn_file").click();
+        }
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+    <script>
+        function showHint()
+        {
+            var str=document.getElementById("bankNumber").value;
+            var xmlhttp;
+            if (str.length==0)
+            {
+                document.getElementById("hintType").innerHTML="";
+                return;
+            }
+
+
+            if (window.XMLHttpRequest)
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {// code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function()
+            {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                    document.getElementById("hintType").innerHTML=xmlhttp.responseText;
+                }
+            }
+
+            xmlhttp.open("GET","/site/user/readbankdetail?q="+str,true);
+
+            xmlhttp.send();
+
+
+        }
+    </script>
+    <script src="/CDN/plugins/jquery/dist/jquery.min.js?v=20160113"></script>
+    <script>
+        $(function () {
+            $("#btn_pay").click(function () {
+
+                var a=$("#bankNumber");
+
+                var b=a.val();
+                var c=b.length;
+                if(c<13){
+                    alert('银行卡号码输入过短，请重新输入！');
+                    a.val(" ").focus();
+                    return false;
+                }
+                if(c>25){
+                    alert('银行卡号码输入过长，请重新输入！');
+                    a.val(" ").focus();
+                    return false;
+                }
+
+            });
+
+            $("#btn_pay").click(function () {
+                showHint();
+                var type=$("#bankType");
+                var val=type.val();
+                var l=val.length;
+
+                if(l==0){
+                    alert('您输入的银行卡号不正确');
+                    return false;
+                }else{
+
+                    return true;
+                }
+
+
+            });
+
+        });
+    </script>
+
+
+    <script src="/img/jquery-1.4.4.min.js"></script>
+    <script src="/img/ajaxfileupload.js"></script>
+    <script>
+        function post() {
+
+            $.ajaxFileUpload
+            (
+                    {
+                        url: '/site/user/readbankno',
+                        secureuri: false,
+                        fileElementId: 'bankImg',
+                        dataType: 'content',
+//				data:{name:'logan', id:'id'},
+                        success: function (data, status) {
+
+                            $("#ajax").html(data);
+                            waitTime();
+
+                        },
+                        error: function (data, status, e) {
+                            alert(e);
+                        }
+                    }
+            )
+        }
+
+
+        var wait = 10;
+        function waitTime() {
+            var obj = document.getElementById("wait");
+            if (wait == 0) {
+                obj.removeAttribute("disabled");
+                obj.value = "确定上传";
+                wait = 10;
+            } else {
+                obj.setAttribute("disabled", true);
+                obj.value = wait + "s重新上传";
+                wait--;
+                setTimeout(function () {
+                            waitTime()
+                        },
+                        1000)
+            }
+        }
+
+    </script>
+
+{% endblock %}
+
+{% block footerJs %}
+
+{% endblock %}

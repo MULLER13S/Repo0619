@@ -1,0 +1,26 @@
+<?php
+namespace app\controllers;
+
+use yii\web\Controller;
+
+
+
+class CacheController extends Controller{
+
+    public function actionIndex(){
+
+        $cache=\YII::$app->cache;
+
+        $dependency=new \yii\caching\FileDependency(['fileName'=>'hw.txt']);
+        $cache->add('key1','hello world',300,$dependency);
+
+
+$dependency=new \yii\caching\ExpressionDependency(['expression'=>'\yii::$app->request->get("name")']);
+//        $cache->add('key1','hello world2222',300,$dependency);
+        var_dump($cache->get('key1'));
+
+
+$dependency=new \yii\caching\DbDependency(['sql'=>'select count(*) from yii.order']);
+
+    }
+}

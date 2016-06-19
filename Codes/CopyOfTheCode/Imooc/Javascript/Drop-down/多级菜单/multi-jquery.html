@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multi-level drop-down menu</title>
+    <style type="text/css">
+        /*body
+        {
+            margin: 0;
+            padding: 30px;
+            background: #FFF;
+            color: #666;
+            behavior: url(../Scripts/csshover.htc);
+            csshover.htc是兼容IE6；
+        }*/
+
+        .top-nav
+        {
+
+            font-size: 12px;
+            font-weight: bold;
+
+            list-style: none;
+            border-bottom: 8px solid #DC4E1B;
+            overflow: auto;
+        }
+        .top-nav li
+        {
+            float: left;
+            margin-right: 1px;
+        }
+
+        .top-nav li a
+        {
+            line-height: 20px;
+            text-decoration: none;
+            background: #DDDDDD;
+            color: #666666;
+            display: block;
+            width: 80px;
+            text-align: center;
+        }
+        .top-nav li a:hover{
+            background-color: #900;
+            color: white;
+        }
+        .top-nav li ul{
+            display:none;
+            list-style: none;
+            padding: 0;
+            position: relative;
+        }
+        .top-nav li:hover ul{
+            /*display:block;*/
+            width: 80px;
+        }
+        .top-nav li:hover ul li ul{
+            /*display: none;*/
+        }
+        .top-nav li ul li:hover ul{
+            /*display:block;*/
+            top:0;
+            left: 80px;
+            position: absolute;
+        }
+
+
+    </style>
+    <script src="../Scripts/jquery.js"></script>
+    <script type="text/javascript">
+        /*$(function(){
+            $("li").mouseover(function(){
+                $(this).css("display","none");
+            })
+        })*/
+        $(function() {
+            $("li").mouseover(function () {
+                $(this).children("ul").css("display", "block");
+            }).mouseout(function () {
+                $(this).children("ul").css("display", "none");
+            })
+        })
+    </script>
+</head>
+<body>
+<ul class="top-nav">
+    <li><a href="#">慕课网首页</a></li>
+    <li><a href="#">课程大厅</a> </li>
+    <li><a href="#">学习中心 +</a>
+        <ul>
+            <li><a href="#">前端课程 +</a>
+                <ul>
+                    <li><a href="#">javascript</a></li>
+                    <li><a href="#">css</a></li>
+                    <li><a href="#">jquery</a></li>
+                </ul>
+            </li>
+            <li><a href="#">手机开发</a>
+                <ul>
+                    <li><a href="#">ios</a></li>
+                    <li><a href="#">android</a></li>
+                    <li><a href="#">wp</a></li>
+                </ul>
+            </li>
+            <li><a href="#">后台编程</a></li>
+        </ul>
+    </li>
+    <li><a href="#">关于我们</a></li>
+</ul>
+</body>
+</html>

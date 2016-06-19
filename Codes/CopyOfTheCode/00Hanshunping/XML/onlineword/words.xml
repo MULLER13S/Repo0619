@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<words>
+    <word>
+        <en>boy</en>
+        <ch>男孩</ch>
+    </word>
+    <word>
+        <en>girl</en>
+        <ch>女孩</ch>
+    </word>
+    <word>
+        <en>school</en>
+        <ch>学校</ch>
+    </word>
+    <word>
+        <en>class</en>
+        <ch>班级</ch>
+    </word>
+<word><en>row</en><ch>123</ch></word><word><en>row</en><ch>行，排</ch></word></words>

@@ -1,0 +1,19 @@
+<h2>
+    正在跳转 <a id='href' href='http://www.163.com'>跳转</a>
+    等待时间：<b id='wait' ></b>
+</h2>
+
+<script type='text/javascript'>
+    href = document.getElementById('href').href;
+    var i = 3;
+    var intervalid;
+    intervalid = setInterval('fun()', 1000);
+    function fun() {
+        if (i == 0) {
+            location.href = href;
+            clearInterval(intervalid);
+        }
+        document.getElementById('wait').innerHTML = i;
+        i--;
+    }
+</script>

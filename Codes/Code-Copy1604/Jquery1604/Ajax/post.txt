@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $.post("/try/ajax/demo_test_post.php",
+    {
+      name:"Donald Duck",
+      city:"Duckburg"
+    },
+    function(data,status){
+      alert("Data: " + data + "\nStatus: " + status);
+    });
+  });
+});
+</script>
+</head>
+<body>
+
+<button>发送一个 HTTP POST 请求道页面并获取返回内容</button>
+
+</body>
+</html>
+
+
+
+<?php
+$name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
+$city = isset($_POST['city']) ? htmlspecialchars($_POST['city']) : '';
+echo 'Dear ' . $name;
+echo 'Hope you live well in ' . $city;
+?>

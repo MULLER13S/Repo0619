@@ -1,0 +1,37 @@
+<html xmlns=”http://www.w3.org/1999/xhtml”>
+<head>
+
+    <title>BALL</title>
+
+</head>
+<body style="BACKGROUND-IMAGE:url(image/turtle.jpg)"> 
+<div id="div1" style="left:100px;position:absolute;top:0;">
+    <img src="image/sun.gif" />
+</div>
+<script>
+    function a(){
+        window.alert(document.documentElement.clientWidth);
+        window.alert(document.documentElement.clientHeight);
+    }
+    var divX=1;
+    var divY=1;
+    var posX=0;
+    var posY=0;
+    function sunMove(){
+        posX+=2*divX;
+        posY+=2*divY;
+        div1.style.top=posY+"px";
+        div1.style.left=posX+"px";
+        if(posX+div1.offsetWidth>=document.body.clientWidth||posX<=0){
+            divX=-divX;   }
+        //必须用documentElement.clientHeight.  body不起作用
+        if(posY+div1.offsetHeight>document.documentElement.clientHeight||posY<=0){
+            divY=-divY;   }
+
+
+    }
+    setInterval("sunMove()",10);
+    setInterval("a()",4000);
+</script>
+</body>
+</html>

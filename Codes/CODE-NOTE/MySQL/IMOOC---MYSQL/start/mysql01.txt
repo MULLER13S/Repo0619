@@ -1,0 +1,4 @@
+1----show create database t1;
+2----show WARNINGS;show errors;
+
+

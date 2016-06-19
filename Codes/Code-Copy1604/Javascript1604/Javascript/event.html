@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        function test3(e){
+            var pic=document.getElementById("pic"); if(e.value=="红色"){
+                pic.style.backgroundColor="red"; }
+            else if(e.value=="黑色"){
+                pic.style.backgroundColor="black"; } }
+    </script>
+</head>
+<body>
+<!--&lt;!&ndash;//js如何访问css属性，来改变外观-->
+  
+<div id="pic" style="border:1px;background-color:red;width:300px;height:300px">23</div>
+<input type="button" onclick="test3(this)" value="红色" />
+ <input type="button" onclick="test3(this)" value="黑色">
+ </body> 
+</html>

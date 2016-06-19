@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
+</head>
+<body>
+<h1>A snapshot</h1>
+<ul id="imageGallery">
+    <li>
+        <a href="images/001.jpg" onclick="showPic(this);return false;" title="a cup of coffee">
+            <img src="images/001.jpg" alt="001"  width="200" height="200" /> </a>
+    </li><li>
+        <a href="images/002.jpg" onclick="showPic(this);return false;" title="a bottle of water">
+            <img src="images/002.jpg" alt="001" width="200" height="200" /></a>
+    </li><li>
+        <a href="images/003.jpg" onclick="showPic(this);return false;" title="a bunch of people">
+            <img src="images/003.jpg" alt="001" width="200" height="200" /></a>
+    </li><li>
+        <a href="images/004.jpg" onclick="showPic(this);return false;" title="a big world">
+            <img src="images/004.jpg" alt="001" width="200" height="200" />
+        </a>
+    </li>
+</ul>
+<img id="holder" src="images/aaa.gif" width="500px" height="400px" alt="blank"/>
+<P id="description">choose a image</P>
+<script src="scripts/imageLink.js"></script>
+</body>
+</html>

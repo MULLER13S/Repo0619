@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<span id="myspan" onclick="test(this);" style="border: 3px solid red;
+cursor:hand; ">+</span> 我的家庭 
+<ul id="myul" style="display:none">
+    <li>爸爸</li> <li>妈妈</li> <li>哥哥</li> </ul> 
+<script>
+    function test(obj){
+        if(obj.innerText=="+"){
+            myul.style.display="block";
+            obj.innerText="-";
+        }else if(obj.innerText=="-"){
+            myul.style.display="none"; 
+             obj.innerText="+";
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/App/Controller/Home.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/App/Controller/Login.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/App/Decorator" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/App/Decorator/Json.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/App/Decorator/Login.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/App/Decorator/Template.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/AllUser.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/Application.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/Canvas.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/ColorDrawDecorator.php" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/IMooc/Config.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/Database/MySQL.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/Database/MySQLi.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/Database/PDO.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/Database/Proxy.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/Database/Proxy.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/DrawDecorator.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/Event.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/EventGenerator.php" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/IMooc/FemaleUserStrategy.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/IDatabase.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/IUserProxy.php" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/IMooc/MaleUserStrategy.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/Observer.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/Page.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/Proxy.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/SizeDrawDecorator.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/User.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/IMooc/UserStrategy.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/configs" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/configs" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/configs/controller.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/configs/controller.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/configs/database.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/configs/database.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/configs/model.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/configs/model.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/templates" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/templates/home/index.php" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

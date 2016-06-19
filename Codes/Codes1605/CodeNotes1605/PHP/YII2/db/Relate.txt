@@ -1,0 +1,57 @@
+class JoinController extends Controller{
+    public function actionIndex(){
+        //根据顾客查询他的订单的信息
+       // $customer=Customer::find()->where(['name'=>'zhangsan'])->one();
+//        $orders=$customer->hasMany('app\models\Order',['customer_id'=>'id'])->asArray()->all();
+//        $orders=$customer->hasMany(Order::className(),['customer_id'=>'id'])->asArray()->all();
+//        $orders=$customer->getOrders();
+        //当存在一个没有定义的属性时，会自动调用__get方法，也就是getorders方法，最后还会补上一个all()方法，所以模型里面先去掉all()方法；
+        //$orders=$customer->orders;
+
+
+        //print_r($orders);
+
+
+        //根据订单查询顾客
+        $order=Order::find()->where(['id'=>4])->one();
+        $customer=$order->customer;
+        print_r($customer);
+    }
+}
+
+class Customer extends ActiveRecord{
+    //帮助顾客获得订单信息
+    public function getOrders(){
+        $orders=$this->hasMany(Order::className(),['customer_id'=>'id'])->asArray();
+        return $orders;
+    }
+
+}
+
+
+class Order extends ActiveRecord{
+    public function getCustomer(){
+        return  $this->hasOne(Customer::className(),['id'=>'customer_id'])->asArray();
+        
+    }
+
+}
+
+//关联查询结果缓存
+        $customer=Customer::find()->where(['name'=>'lisi'])->one();
+        $orders=$customer->orders;
+        unset($orders);
+        $orders2=$customer->orders;
+
+
+//关联查询的多次查询
+        //select * from customer
+        //select * from order where customer_id in(....)
+	//with('orders')等于加上getorders();
+        $customers=Customer::find()->with('orders')->all();
+        foreach($customers as $customer){
+            $orders=$customer->orders;
+        }
+
+
+

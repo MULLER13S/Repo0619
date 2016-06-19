@@ -1,0 +1,3 @@
+netstat -anb
+在运行里输入regsvr dll路径---------注册DLL；
+运行-》regedit;

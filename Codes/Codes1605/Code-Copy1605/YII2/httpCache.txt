@@ -1,0 +1,43 @@
+ public function behaviors()
+    {
+
+        /*return [
+            [
+                'class'=>'yii\filters\PageCache',
+                'duration'=>30,
+                'only'=>['page','test'], //只对page和test两个控制器有效
+                'dependency'=>[
+                    'class'=>'yii\caching\FileDependency',
+                    'fileName'=>'hw.txt'
+                ]
+            ]
+        ];*/
+
+
+        return [
+          [
+              'class'=>'yii\filters\HttpCache',
+              'lastModified'=>function(){
+                  return filemtime('hw.txt');
+              },
+              'etagSeed'=>function(){
+                  $fp=fopen('hw.txt','r');
+                  $title=fgets($fp);
+                  fclose($fp);
+                  return $title;
+              }
+          ]
+        ];
+    }
+
+    public function actionPage(){
+
+        echo "13345433f";
+
+    }
+
+    public function actionHttp(){
+        $content=file_get_contents('hw.txt');
+        return $this->renderPartial('index',['new'=>$content]);
+
+    }

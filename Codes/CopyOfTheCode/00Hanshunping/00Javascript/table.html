@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>table</title>
+    <script>
+        function test(){
+            var mytable=document.getElementById("mytab");
+            window.alert(mytable.rows[2].cells[2].innerText);
+        }
+        function addHero(){
+//创建一个   
+// document.createElement("<tr>"); 
+            var mytable=document.getElementById("mytab");
+            var tableRow=mytable.insertRow(3);
+            var tableCell=tableRow.insertCell(0);
+            tableCell.innerHTML="3";
+            var tableCell1=tableRow.insertCell(1);
+            tableCell1.innerHTML="吴用";
+            var tableCell2=tableRow.insertCell(2);
+            tableCell2.innerHTML="智多星";
+
+        }
+        function deleteHero(){
+            var mytable=document.getElementById("mytab");
+            mytable.deleteRow(3);
+        }
+        function updateHero(){
+            var mytable=document.getElementById("mytab");
+            mytable.rows[1].cells[2].innerHTML="黑三郎";
+        }
+    </script>
+</head>
+<body>
+
+<table id="mytab" border="1px"> 
+<tr><td>排名</td><td>姓名</td><td>外号</td></tr>
+ <tr><td>1</td><td>宋江</td><td>及时雨</td></tr>
+ <tr><td>2</td><td>卢俊义</td><td>玉麒麟</td></tr> </table> 
+<input type="button" onclick="test()" value="tesing"/> 
+<input type="button" onclick="addHero()" value="添加"/> 
+<input type="button" onclick="deleteHero()" value="删除"/>
+ <input type="button" onclick="updateHero()" value="修改"/> 
+</body>
+</html>

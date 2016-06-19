@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html style="width:100%;height:100%;">
+	<head>
+		<meta charset="utf-8">
+		<title>JS API</title>
+	</head>
+	<body style="width:100%;height:100%;margin:0;">
+		<div id="map" style="width:100%;height:100%;"></div>
+		<div id="zoomIn" style="z-index:999;position:absolute;left:0;bottom: 120px;width: 60px;height:30px;background-color: #008CFF;color:#FFF;line-height:30px;text-align:center;border-radius:3px;cursor:pointer;">放大</div>
+		<div id="zoomOut" style="position:absolute;left:0;bottom: 60px;width: 60px;height:30px;background-color: #008CFF;color:#FFF;line-height:30px;text-align:center;border-radius:3px;cursor:pointer;">缩小</div>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=b79caad469676224a0e32143ce5add02"></script>
+		<script type="text/javascript">
+			(function(){
+				var map = new AMap.Map('map');
+				map.setCity('安庆');
+				map.setZoom(12);
+				console.log(map.getZoom());
+				
+				document.getElementById('zoomIn').addEventListener('click', function(e){
+					map.zoomIn();
+				});
+				
+				document.getElementById('zoomOut').addEventListener('click', function(e){
+					map.zoomOut();
+				});
+				
+				AMap.event.addListener(map, 'dragend', function(e){
+					alert('Hello AMap, Hello JS API.你当是拖地呢，还拖我！');
+				});
+			})();
+		</script>
+	</body>
+</html>
+
+

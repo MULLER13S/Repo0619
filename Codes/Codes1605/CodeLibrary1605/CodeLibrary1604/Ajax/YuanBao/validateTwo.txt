@@ -1,0 +1,257 @@
+{% extends "@app/modules/layouts/social.twig" %}
+{% block content %}
+    <div class="container rel">
+        <div class="row">
+            <p class="plr-15 fn-6 f-lg mt-15">三重安全机制认证</p>
+            <div class="text-center">
+                <img src="/CDN/img/z2.png" class="whi-35">
+            </div>
+            <div class="text-center">
+                <img src="/CDN/img/shenfenrenzheng.png" class="wh-120">
+            </div>
+        </div>
+
+        <form action="/site/user/bankvalidate" method="post">
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell ptm">
+                    <div class="weui_cell_hd"><span class="weui_label wh-4">姓名</span></div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="weui_input" type="text" name="name" maxlength="24">
+                    </div>
+                </div>
+                <div class="weui_cell ptm">
+                    <div class="weui_cell_hd"><span class="weui_label wh-4">身份证</span></div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                    <span id="ajax"><input class="weui_input check" type="text" id="idNo" name="idNumber"
+                                           onchange="go()">
+
+                </span>
+                    </div>
+
+                </div>
+                <div class="weui_cell ptm">
+                    <div class="weui_cell_hd"><span class="weui_label wh-4">手机号码</span></div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="weui_input" id='phone' name="phone" type="number" pattern="[0-9]*">
+                    </div>
+                </div>
+                <div class="weui_cell ptm">
+                    <div class="weui_cell_hd"><span class="weui_label wh-4">验证码</span></div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="weui_input" name="verifyCode" type="number" placeholder="">
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="button" id="btn" value="获取验证码" class="btn btn-default btn-grey pull-right"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <input type="button" id="wait" class="btn btn-default btn-lg btn-block org " value="确定上传"
+                       onclick="post()"/>
+            </div>
+
+            <div class="container">
+
+                <button type="submit" id="btn_pay" onclick="go()" class="btn btn-default btn-lg btn-block org">
+                    下一步
+                </button>
+
+            </div>
+        </form>
+
+        <form enctype="multipart/form-data" action="/site/user/readidno" method="post" target="hiddenIFrame">
+
+            <div class="zzzz pos"
+                 style="background: url('/CDN/img/xiangji.png') no-repeat;background-size: 100% 100%; ">
+                <input type="file" name="idPhoto" id="idImg" class="fileInput weui_uploader_input" accept="image/*"
+                       onchange="fileChange(this);"/>
+            </div>
+
+
+        </form>
+    </div>
+
+
+    <div style="height: 40px;"></div>
+
+    <iframe id='hiddenIFrame' name='hiddenIFrame' style="display:none;"></iframe>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block footerJs %}
+
+    <script type="text/javascript">
+
+        var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+        function fileChange(target, id) {
+            var fileSize = 0;
+            var filetypes = [".jpg", ".png", ".jpeg"];
+            var filepath = target.value;
+            var filemaxsize = 300;//300KB
+            if (filepath) {
+                var isnext = false;
+                var fileend = filepath.substring(filepath.lastIndexOf("."));
+                if (filetypes && filetypes.length > 0) {
+                    for (var i = 0; i < filetypes.length; i++) {
+                        if (filetypes[i] == fileend) {
+                            isnext = true;
+                            break;
+                        }
+                    }
+                }
+                if (!isnext) {
+                    alert("不接受此文件类型！请选择jpg,png,jpeg格式");
+                    target.value = "";
+                    return false;
+                }
+            } else {
+                return false;
+            }
+            if (isIE && !target.files) {
+                var filePath = target.value;
+                var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
+                if (!fileSystem.FileExists(filePath)) {
+                    alert("附件不存在，请重新输入！");
+                    return false;
+                }
+                var file = fileSystem.GetFile(filePath);
+                fileSize = file.Size;
+            } else {
+                fileSize = target.files[0].size;
+            }
+
+            var size = fileSize / 1024;
+            if (size > filemaxsize) {
+                alert("附件大小不能大于" + filemaxsize + "KB！");
+                target.value = "";
+                return false;
+            }
+            if (size <= 0) {
+                alert("附件大小不能为0KB！");
+                target.value = "";
+                return false;
+            }
+        }
+
+        function file() {
+            document.getElementById("btn_file").click();
+        }
+
+
+        //function $(e){return document.getElementById(e);}
+        function go() {
+            var reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
+            if (!reg.test($("#idNo").val())) {
+                $(".check").val('');
+                alert("请填写正确的18位身份证号码");
+                return false;
+            }
+        }
+
+
+        $(function () {
+
+            $("#btn").click(function () {
+                var phone = $("#phone").val();
+                if (phone == null || phone == '') {
+                    prompt(2, "手机号码不能为空");
+                    return false;
+                }
+
+                if (!(/^1[3|4|5|7|8][0-9]\d{8}$/.test(phone))) {
+                    prompt(2, "请输入11位手机号码");
+                    return false;
+                }
+                // 发送验证码
+                $.post("/site/default/sendsms", {'phone': phone}, function (data) {
+                    if (data.status) {
+                        prompt(1, '发送成功');
+                    } else {
+                        prompt(2, data.alert);
+                    }
+                }, "json");
+                timeWait(this);
+            });
+
+            var wait = 30;
+
+            function timeWait(sms) {
+                if (wait == 0) {
+                    sms.removeAttribute("disabled");
+                    sms.value = "获取验证码";
+                    wait = 30;
+                } else {
+                    sms.setAttribute("disabled", true);
+                    sms.value = wait + "s重新发送";
+                    wait--;
+                    setTimeout(function () {
+                                timeWait(sms);
+                            },
+                            1000);
+                }
+            }
+        });
+
+
+    </script>
+
+    <script src="/img/jquery-1.4.4.min.js"></script>
+    <script src="/img/ajaxfileupload.js"></script>
+    <script>
+        function post() {
+
+            $.ajaxFileUpload
+            (
+                    {
+                        url: '/site/user/readidno',
+                        secureuri: false,
+                        fileElementId: 'idImg',
+                        dataType: 'content',
+//				data:{name:'logan', id:'id'},
+                        success: function (data, status) {
+                            //alert(data);
+                            $("#ajax").html(data);
+                            waitTime();
+
+                        },
+                        error: function (data, status, e) {
+                            alert(e);
+                        }
+                    }
+            )
+        }
+
+
+        var wait = 10;
+        function waitTime() {
+            var obj = document.getElementById("wait");
+            if (wait == 0) {
+                obj.removeAttribute("disabled");
+                obj.value = "确定上传";
+                wait = 10;
+            } else {
+                obj.setAttribute("disabled", true);
+                obj.value = wait + "s重新上传";
+                wait--;
+                setTimeout(function () {
+                           waitTime()
+                        },
+                        1000)
+            }
+        }
+
+    </script>
+
+{% endblock %}

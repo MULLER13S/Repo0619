@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sohu</title>
+    <link href="my.css" type="text/css" rel="stylesheet"/>
+    <script>
+        function change(obj,obj2){
+            //window.alert(content1.style.display);
+            //window.alert(obj.innerText.length+"="+"出国".length);
+            obj2.style.backgroundColor="#FFC63D";
+            if(obj=="zs"){
+                //window.alert('招生');
+                content1.style.display="block";
+                content2.style.display="none";
+                content3.style.display="none";
+            }else if(obj=="rz"){
+                //window.alert('热招');
+                content1.style.display="none";
+                content2.style.display="block";
+                content3.style.display="none";
+            }else if(obj=="cg"){
+                //window.alert('出国');
+                content1.style.display="none";
+                content2.style.display="none";
+                content3.style.display="block";
+            }
+        }
+        function change2(obj){
+            obj.style.backgroundColor="#E8E8E8";
+        }
+    </script>
+
+</head>
+<body>
+<div class="div1">  <div class="navi"> 
+ <ul>
+    <li onmouseover="change('zs',this);" onmouseout="change2(this)">招生</li>
+      <li onmouseover="change('rz',this);" onmouseout="change2(this)">热招</li> 
+     <li onmouseover="change('cg',this);" onmouseout="change2(this)">出国</li>  
+</ul>  </div>
+<div id="content2" class="content2">  <ul>  
+     <li><a href='#'>热招热招热招月!</a></li>   
+    <li><a href='#'>热招热招热招月!</a></li>   
+    <li><a href='#'>热招热招热招月!</a></li>  
+     <li><a href='#'>热招热招热招月!</a></li>  
+     <li><a href='#'>热招热招热招月!</a></li> 
+      <li><a href='#'>热招热招热招月!</a></li> 
+      <li><a href='#'>热招热招热招月!</a></li>  
+     <li><a href='#'>热招热招热招月!</a></li>  </ul>  </div>
+<div id="content3" class="content3">  <ul> 
+      <li><a href='#'>出国出国出国月!</a></li>  
+     <li><a href='#'>出国出国出国月!</a></li>   
+    <li><a href='#'>出国出国出国月!</a></li>  
+     <li><a href='#'>出国出国出国月!</a></li>  
+     <li><a href='#'>出国出国出国月!</a></li>  
+     <li><a href='#'>出国出国出国月!</a></li> 
+      <li><a href='#'>出国出国出国月!</a></li> 
+      <li><a href='#'>出国出国出国月!</a></li>  </ul>  </div>
+<div id="content1" class="content1">  <ul> 
+      <li><a href='#'>澳洲留学高中月!</a></li>  
+     <li><a href='#'>澳洲留学高中月!</a></li>  
+     <li><a href='#'>澳洲留学高中月!</a></li>  
+     <li><a href='#'>澳洲留学高中月!</a></li>
+    </ul>
+    </div>
+    </div>
+</body>
+</html>

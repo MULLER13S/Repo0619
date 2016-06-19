@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multi-level drop-down menu</title>
+    <style type="text/css">
+        .top-nav {
+
+            font-size: 12px;
+            font-weight: bold;
+            list-style: none;
+        }
+
+        .top-nav li {
+            float: left;
+            margin-right: 1px;
+        }
+
+        .top-nav li a {
+            line-height: 34px;
+            text-decoration: none;
+            background: #3f240e;
+            color: #fff;
+            display: block;
+            width: 80px;
+            text-align: center;
+        }
+
+        .top-nav ul {
+            list-style: none;
+            display: none;
+            padding: 0;
+            position: absolute;
+        }
+
+        .top-nav li a:hover {
+            background: url("images/slide-pannel_14.png") 0 0 repeat-x;
+        }
+        .corner{
+            display: block;
+            height: 11px;
+            background: url("images/bird.png") 31px 0 no-repeat;
+        }
+
+    </style>
+    <script src="../Scripts/jquery.js"></script>
+    <script>
+        $(function(){
+            $(".top-nav li").mousemove(function(){
+                $(this).find("ul").slideDown("1000");
+            });
+            $(".top-nav li").mouseleave(function(){
+                $(this).find("ul").slideUp("slow");
+            });
+        })
+    </script>
+      </head>
+<body>
+<ul class="top-nav">
+    <li><a href="#">慕课网首页</a></li>
+    <li><a href="#">课程大厅</a>
+        <ul>
+            <span class="corner"></span>
+            <li><a href="#">javascript</a></li>
+            <li><a href="#">css</a></li>
+            <li><a href="#">jquery</a></li>
+        </ul>
+    </li>
+    <li><a href="#">学习中心 +</a>
+                <ul>
+                    <span class="corner"></span>
+                    <li><a href="#">ios</a></li>
+                    <li><a href="#">android</a></li>
+                    <li><a href="#">wp</a></li>
+                </ul>
+            </li>
+            <li><a href="#">后台编程</a></li>
+
+
+    <li><a href="#">关于我们</a></li>
+</ul>
+</body>
+</html>

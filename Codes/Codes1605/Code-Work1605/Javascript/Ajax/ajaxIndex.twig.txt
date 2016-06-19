@@ -1,0 +1,314 @@
+{% extends "@app/modules/layouts/main.twig" %}
+
+{% block content %}
+    <style type="text/css">
+
+        #gaodeMap {
+            height: 600px;
+            width: 100%;
+            position: absolute;
+            left: 200px;
+            top: 260px;
+            z-index: 99;
+            background: #000;
+
+        }
+    </style>
+
+    <br/>
+    <form action="" method="post" name="form1" enctype="multipart/form-data">
+        <div>
+            标题：
+            <input type="text" name="ad[title]" style="width: 500px;" placeholder="请输入标题">
+
+        </div>
+        <br/>
+
+        <div>
+            类型：
+            <select name="ad[type][]" id="adType" onchange="switchType()">
+                <option value="adPacket" selected>广告包</option>
+                <option value="taskPacket">任务包</option>
+            </select>
+
+        </div>
+        <br/>
+
+        <div>
+            列表图片：<input type="file" name="ad[imgFile]" accept="image/*"/>
+            默认图片：
+            <input type="radio" value="/img/yuanbao.png" name="ad[imgDefault]" checked="checked">
+            <img src="/img/default/yuanbao.png" name="ad[defImg]"/>
+            <input type="radio" value="/img/redPacket.png" name="ad[imgDefault]">
+            <img src="/img/default/redPacket.png" name="ad[defImg]"/>
+
+        </div>
+        <br/>
+
+        <div id="packetCategory">
+            类别：
+            <select name="ad[class][]" id="adClass" onchange="switchTemplate()">
+                <option value="ad1" selected>广告逛市场</option>
+                <option value="ad2">广告2</option>
+                <option value="ad3">广告3</option>
+            </select>
+
+        </div>
+        <br/>
+
+
+
+
+
+        -----------------------------------------------------------------------------------
+        -----------------------------------------------------------------------------------
+        <div id="switchTemplate">
+
+        <div style="background-color: grey">
+            <div>
+                城市：
+                <select name="ad[city]">
+                    <option value="hangzhou" selected>杭州</option>
+                    <option value="beijing">北京</option>
+                </select>
+
+                商城：
+                <select name="ad[market]">
+                    <option value="sjq" selected>四季青</option>
+                    <option value="spring">春天</option>
+                </select>
+
+
+            </div>
+            <br/>
+
+            <div>
+                楼层：
+                <select name="ad[floor]">
+                    <option value="floor1" selected>1楼</option>
+                    <option value="floor2">2楼</option>
+                    <option value="floor3">3楼</option>
+                    <option value="floor4">4楼</option>
+                </select>
+
+                档口：
+                <select name="ad[booth]">
+                    <option value="1001" selected>1001</option>
+                    <option value="1002">1002</option>
+                    <option value="1003">1003</option>
+                    <option value="1004">1004</option>
+                </select>
+
+
+            </div>
+            <br/>
+
+            <div>
+                内容：
+                <textarea name="ad[content1]"></textarea>
+                详细图片：
+                <input type="file" name="ad[detail1]">
+                内容：
+                <textarea name="ad[content2]"></textarea>
+                详细图片：
+                <input type="file" name="ad[detail2]">
+
+
+            </div>
+            <br/>
+
+            <div>
+                开始时间：
+                <input type="text" class="laydate-icon" readonly id="start" name="ad[valid_start_time]">
+                结束时间：
+                <input type="text" class="laydate-icon" readonly id="end" name="ad[valid_end_time]">
+
+
+            </div>
+            <br/>
+
+            <div>
+                最小红包：
+                <input type="text" name="ad[min_red_packet]" placeholder="请输入最小红包金额(金元宝)">
+                最大红包：
+                <input type="text" name="ad[max_red_packet]" placeholder="请输入最大红包金额(金元宝)">
+
+
+            </div>
+            <br/>
+
+            <div>
+                红包数量：
+                <input type="text" name="ad[red_count]">
+
+            </div>
+            <br/>
+
+            <div>
+                分享红包：
+                <input type="text" name="ad[share_red]">
+                分享次数：
+                <input type="text" name="ad[share_count]">
+
+            </div>
+            <br/>
+
+            <div>
+                冲入金额：
+                <input type="text" name="ad[recharge_money]">
+                <input type="button" value="充值">
+                覆盖范围：
+                <input type="text" name="ad[cover_width]" placeholder="不填默认为10公里">公里
+
+            </div>
+            <br/>
+
+            <div>
+                中心地点：
+                <span id="center_area" style="color: red">西城博司</span>
+                <input type="button" id="locate" value="定位" onclick="locatePos()">
+
+
+            </div>
+            <br/>
+
+        </div>
+
+        </div>
+        ------------------------------------------------------------------------------------------
+        ----------------------------------------------------------------------------------
+
+
+
+
+        <div>
+            发布状态：
+            <input type="radio" name="status" value="online">上线
+            <input type="radio" name="status" value="offline">下线
+        </div>
+        <br/>
+
+        <div>
+
+            <input type="submit" value="确认">
+            <input type="button" value="取消">
+        </div>
+        <br/>
+
+
+    </form>
+
+
+    <div id="add"></div>
+    <div id="gaodeMap" style="display: none;">
+        {% block map %}{% include "@app/modules/ad/views/publish/map.twig" %}{% endblock %}
+    </div>
+    {#地图定位#}
+    <script>
+        function locatePos() {
+            $('#gaodeMap').css('display', 'block');
+
+
+        }
+
+    </script>
+
+    <script src="http://app.yb111.cn/CDN/plugins/laydate/laydate.js"></script>
+    <script type="text/javascript">
+        var start = {
+            elem: '#start',
+            format: 'YYYY/MM/DD hh:mm:ss',
+//     min: laydate.now(), //设定最小日期为当前日期
+            max: '2099-06-16 23:59:59', //最大日期
+            istime: true,
+            istoday: false,
+            choose: function (datas) {
+                end.min = datas; //开始日选好后，重置结束日的最小日期
+                end.start = datas //将结束日的初始值设定为开始日
+            }
+        };
+        var end = {
+            elem: '#end',
+            format: 'YYYY/MM/DD hh:mm:ss',
+//     min: laydate.now(),
+            max: '2099-06-16 23:59:59',
+            istime: true,
+            istoday: false,
+            choose: function (datas) {
+                start.max = datas; //结束日选好后，重置开始日的最大日期
+            }
+        };
+        laydate(start);
+        laydate(end);
+    </script>
+
+    <script>
+        //切换任务模板
+        function switchTemplate() {
+            var str = document.getElementById("adClass").value;
+            var xmlhttp;
+            if (str.length == 0) {
+                document.getElementById("switchTemplate").innerHTML = "";
+                return;
+            }
+
+
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("switchTemplate").innerHTML = xmlhttp.responseText;
+                }
+            }
+
+            xmlhttp.open("GET", "/ad/publish/template?q=" + str, true);
+
+            xmlhttp.send();
+
+
+        }
+
+        //切换包类型
+        function switchType() {
+            var str = document.getElementById("adType").value;
+            var xmlhttp;
+            if (str.length == 0) {
+                document.getElementById("packetCategory").innerHTML = "";
+                return;
+            }
+
+
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                    var content=xmlhttp.responseText;
+//                    转换为对象
+                     content = eval("(" + content + ")");
+
+//                    content=content.split(',');
+//                    document.getElementById("packetCategory").innerHTML = xmlhttp.responseText[0];
+                    document.getElementById("packetCategory").innerHTML = content.type;
+//                    document.getElementById("switchTemplate").innerHTML = xmlhttp.responseText[1];
+                    document.getElementById("switchTemplate").innerHTML = content.template;
+                }
+            }
+
+            xmlhttp.open("GET", "/ad/publish/switchtype?q=" + str, true);
+
+            xmlhttp.send();
+
+
+        }
+    </script>
+
+{% endblock %}

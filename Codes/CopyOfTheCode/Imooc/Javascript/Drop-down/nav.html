@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>导航</title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        #menu{ background-color:#eee; width:600px; height:40px; margin:0 auto;}
+        ul{ list-style:none;}
+        ul li{ float:left;line-height:40px;text-align: center;position:relative;}
+        ul li ul{display:none;position:absolute;left: 0;top:40px;}
+        ul li ul li{ float:none;  margin-top:2px;  }
+        /*在IE浏览器中添加height:40px;*/
+        a{ text-decoration:none; color:#000; display:block;padding: 0 10px;width:90px;}
+        a:hover{ color:#FFF; background-color:#666;}
+        ul li ul li a:hover{background-color:blue;}
+        ul li:hover ul{ display:block;}
+
+
+
+
+    </style>
+</head>
+<body>
+<div id="menu">
+    <ul>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">课程大厅</a>
+            <ul>
+
+                <li><a href="#">JavaScript</a></li>
+                <li><a href="#">jQuery</a></li>
+
+            </ul>
+        </li>
+        <li><a href="#">练习中心</a>
+            <ul>
+                <li><a href="#">视频学习</a></li>
+                <li><a href="#">案例学习</a></li>
+                <li><a href="#">交流平台</a></li>
+            </ul>
+        </li>
+        <li><a href="#">经典案例</a></li>
+        <li><a href="#">关于我们</a></li>
+    </ul>
+
+
+
+
+    </div>
+
+</body>
+</html>

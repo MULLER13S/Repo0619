@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>turtle</title>
+    <script>
+        function test1(e){
+            window.alert("x="+ e.clientX+"y="+ e.clientY);
+        }
+        function Tortoise(x,y){
+            this.x=x;
+            this.y=y;
+            this.speed=10;
+
+            this.Catch=function(){
+                if((this.x>=cock.x-80)
+                        &&(this.x<=cock.x+80)
+                        &&(this.y>=cock.y-60)
+                        &&(this.y<=cock.y+60)){
+                    alert("抓到！");
+                }
+            }
+            this.move_up=function(){
+                this.y-=this.speed;
+                var wugui_div=document.getElementById("wugui");
+                wugui_div.style.top=this.y+"px";
+
+            }
+            this.move_down=function(){
+                this.y+=this.speed;
+                var wugui_div=document.getElementById("wugui");
+                wugui_div.style.top=this.y+"px";
+            }
+            this.move_left=function(){
+                this.x-=this.speed;
+                var wugui_div=document.getElementById("wugui");
+                wugui_div.style.left=this.x+"px";
+            }
+            this.move_right=function(){
+                this.x+=this.speed;
+                var wugui_div=document.getElementById("wugui");
+                wugui_div.style.left=this.x+"px";
+            }
+                        }
+
+        function Cock(x,y){
+            this.x=x;
+            this.y=y;
+            this.speed=1;//移动一个像素 setInterval(定时器)
+        }
+        var tortoise=new Tortoise(100,200);
+        var cock=new Cock(200,200);
+        function move(obj){
+            switch(obj.value){
+                case "向上走":
+                    tortoise.move_up();
+                    tortoise.Catch();
+                    break;
+                case "向下走":
+                    tortoise.move_down();
+                    tortoise.Catch();
+                    break;
+                case "向左走":
+                    tortoise.move_left();
+                    tortoise.Catch();
+                    break;
+                case "向右走":
+                    tortoise.move_right();
+                    tortoise.Catch();
+                    break;
+
+            }
+        }
+        function move2(event){
+            switch(event.keyCode){
+                case 87:
+                    tortoise.move_up();
+                    tortoise.Catch();
+                    break;
+                case 83:
+                    tortoise.move_down();
+                    tortoise.Catch();
+                    break;
+                case 65:
+                    tortoise.move_left();
+                    tortoise.Catch();
+                    break;
+                case 68:
+                    tortoise.move_right();
+                    tortoise.Catch();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    </script>
+</head>
+<body onkeydown="return move2(event)" onmousedown="test1(event)">
+<table id="mytable" border="1">
+    <tr>
+        <td></td>
+        <td><input type="button" value="向上走" onclick="move(this)"/>
+        </td>
+        <td>2016</td>
+    </tr>
+    <tr>
+        <td><input type="button" value="向左走" onclick="move(this)"/></td>
+        <td></td>
+        <td><input type="button" value="向右走" onclick="move(this)"/></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><input type="button" value="向下走" onclick="move(this)"/></td>
+        <td></td>
+    </tr>
+</table>
+
+<div id="wugui" style="position:absolute;left:100px;top:200px;">
+    <img src="image/turtle.jpg" border="1px" alt="turtle" height=60px; width=80px; />
+</div>
+<div id="cock" style="left:200px;position:absolute;top:200px;">
+    <img src="image/cock.jpg" border="1" alt="chiken" height=60px; width=80px; />
+</div>
+</body>
+</html>
+<!--/*
+
+
+ &lt;!&ndash;把乌龟放在一个div&ndash;&gt;  
+  -->

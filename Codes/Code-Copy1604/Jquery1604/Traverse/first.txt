@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("div p").first().css("background-color","yellow");
+});
+</script>
+</head>
+<body>
+
+<h1>Welcome to My Homepage</h1>
+<div>
+<p>This is a paragraph in a div.</p>
+</div>
+
+<div>
+<p>This is a paragraph in another div.</p>
+</div>
+
+<p>This is also a paragraph.</p>
+
+</body>
+</html>

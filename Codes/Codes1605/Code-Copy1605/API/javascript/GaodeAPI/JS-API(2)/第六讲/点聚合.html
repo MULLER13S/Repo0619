@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html style="width:100%;height:100%;">
+<head>
+<meta charset="utf-8">
+<title>JS API公开课</title>
+<style>
+	 body{width:100%;height:100%;margin:0;font-family: "微软雅黑";}
+	 #map{width:100%;height:100%;}
+</style>
+</head>
+<body>
+	<div id="map"></div>
+	<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=5629c67014ba52a5b65c76dcbc86ee38"></script>
+	<script type="text/javascript">
+		(function(){
+			
+			var map = new AMap.Map('map');
+			map.setZoom(12);
+			map.plugin(['AMap.MarkerClusterer'], function(){
+				var cl = new AMap.MarkerClusterer(map, initMarker());
+			});
+			
+			
+			/*随机500个marker*/
+			function initMarker(){
+				var mapBounds = map.getBounds(),
+				    sw = mapBounds.getSouthWest(),
+				    ne = mapBounds.getNorthEast(),
+				    lngSpan = Math.abs(sw.lng - ne.lng),
+				    latSpan = Math.abs(ne.lat - sw.lat)
+				    markers = [];
+			
+				for (var i = 0; i < 50; i ++) {
+				    var markerPosition = new AMap.LngLat(sw.lng + lngSpan * (Math.random() * 1),ne.lat - latSpan * (Math.random() * 1));
+					var marker = new AMap.Marker({
+						position: markerPosition
+//						icon: "http://developer.amap.com/wp-content/uploads/2014/06/marker.png"
+					});
+					markers.push(marker);
+				}
+				return markers;
+			}
+			
+			
+			
+		})();
+	</script>
+</body>
+</html>

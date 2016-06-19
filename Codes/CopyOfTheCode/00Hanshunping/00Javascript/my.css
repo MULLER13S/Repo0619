@@ -1,0 +1,64 @@
+body {
+    font-size: 12px;
+    margin: 0; /*把body的边距清零*/
+}
+
+.div1 {
+    width: 132px; /*width:128px;*/
+    height: 160px;
+    /*background-color:pink;*/
+}
+
+.navi {
+    height: 160px;
+    width: 22px;
+    /*background-color:green;*/
+    float: left;
+}
+
+.navi ul {
+    padding: 0;
+    margin-left: 0;
+}
+
+.navi ul li {
+    height: 50px;
+    width: 22px;
+    background-color: #E8E8E8;
+    float: left;
+    list-style-type: none;
+    margin-top: 3px;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.content3, .content1, .content2 {
+
+    height: 160px;
+    width: 104px;
+    margin-left: 2px;
+    /*background-color:blue;*/
+    float: left;
+}
+
+.content2 ul, .content3 ul, .content1 ul {
+    padding: 0;
+    margin-left: 4px;
+    margin-top: 2px;
+    /*background-color:green;*/
+}
+
+.content2 ul li, .content3 ul li, .content1 ul li {
+    float: left;
+    list-style-type: none;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.content2 {
+    display: none;
+}
+
+.content3 {
+    display: none;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function Master() {
+        this.feed = function (animal, food) {
+            window.alert( animal.constructor);
+            window.alert("主人给" + animal.name + "喂" + food.name);
+        }
+    }
+    function Food(name) {
+        this.name = name;
+    }
+    function Fish(name) {
+        this.fish = Food;
+        this.fish(name);
+    }
+    function Bone(name) {
+        this.bone = Food;
+        this.bone(name);
+    }
+    function Animal(name) {
+        this.name = name;
+    }
+    function Cat(name) {
+        this.cat = Animal;
+        this.cat(name);
+    }
+    var master = new Master();
+    var cat = new Cat("小猫");
+    var fish = new Fish("鱼");
+    master.feed(cat, fish);
+</script>
+</body>
+</html>

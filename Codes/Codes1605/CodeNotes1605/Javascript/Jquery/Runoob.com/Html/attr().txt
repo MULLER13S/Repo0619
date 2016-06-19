@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    alert($("#w3s").attr("href"));
+  });
+});
+</script>
+</head>
+
+<body>
+<p><a href="http://www.w3cschool.cc" id="w3s">W3Cschool.cc</a></p>
+<button>Show href Value</button>
+</body>
+</html>

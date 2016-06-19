@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<class>
+        <stu>
+                <name>Alice</name>
+                <age>68</age>
+                <sex>female</sex>
+                <hobby>sing</hobby>
+        </stu>
+        <stu>
+                <name>Bill</name>
+                <age>41</age>
+                <sex>male</sex>
+                <hobby>run</hobby>
+        </stu>
+        
+
+        <stu>
+                <name>David</name>
+
+                <age>35</age>
+                <sex>male</sex>
+                <hobby>soccer</hobby>
+        </stu>
+</class>
