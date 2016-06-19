@@ -1,0 +1,9 @@
+{ 
+    "require": { 
+        "lorenzo/cakephp-email-queue": "dev-master",
+    "driehle/php-crypt-md5": "2.0.*@dev"
+    }, 
+    "config" : { 
+        "vendor-dir" : "packages" 
+    } 
+}
