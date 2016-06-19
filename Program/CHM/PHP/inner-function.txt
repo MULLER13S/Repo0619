@@ -1,0 +1,10 @@
+1--file_get_contents();
+	string file_get_contents ( string $filename [, bool $use_include_path = false [, resource $context [, int $offset = -1 [, int $maxlen ]]]] )
+	将整个文件读入一个字符串
+2--fgets;
+	string fgets ( resource $handle [, int $length ] );
+	从文件指针中读取一行
+
+3--filemtime;
+	int filemtime ( string $filename );
+	取得文件修改时间

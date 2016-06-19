@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+body,div,ul,li,a{margin:0px;padding:0px;}
+ul{list-style:none}
+.content{width:500px;height:200px;border:1px solid #000;margin:50px auto}
+.tab_title{width:500px;height:30px;overflow:hidden;}
+.tab_content{height:170px;background:red;width:500px;overflow:hidden}
+.tab_content ul{height:170px;}
+.tab_title li{float:left;width:50px;height:30px;line-height:30px; list-style:none;text-align:center;}
+.c_hide{display:none}
+.c_show{display:block}
+</style>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(".tab_title li").each(function(){
+		var n=$(this).index();
+		$(this).click(function(){
+			$(".c_hide").eq(n).addClass("c_show").siblings().removeClass("c_show")
+			})
+		})
+	})/*如果你想实现鼠标放上不用就切换，而不是点击切换的话，就把click换成mouseover*/
+</script>
+</head>
+
+<body>
+<div class="content">
+<ul class="tab_title"><li style="background:red">aaa</li><li style="background:yellow">bbb</li><li style="background:green">ccc</li></ul>
+<div class="tab_content">
+<ul class="c_hide c_show" style="background:red"><li>aaaaaaaaaaaaaaaa</li><li>aaaaaaaaaaaaaaaa</li><li>aaaaaaaaaaaaaaaa</li><li>aaaaaaaaaaaaaaaa</li></ul>
+<ul class="c_hide" style="background:yellow"><li>bbbbbbbbbbbbbbbb</li><li>bbbbbbbbbbbbbbbb</li><li>bbbbbbbbbbbbbbbb</li><li>bbbbbbbbbbbbbbbb</li></ul>
+<ul class="c_hide" style="background:green"><li>ccccccccccccccc</li><li>ccccccccccccccccc</li><li>ccccccccccccccc</li><li>cccccccccccccccccc</li></ul>
+</div>
+</div>
+
+</body>
+</html>

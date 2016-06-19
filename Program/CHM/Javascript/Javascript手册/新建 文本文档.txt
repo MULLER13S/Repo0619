@@ -1,0 +1,8 @@
+document.write()
+onclick鼠标点击事件
+x.innerHTML
+match()使用正则表达式模式对字符串执行查找，并将包含查找的结果作为数组返回。
+isNaN()返回一个Boolean值，指明提供的值是否是保留值NaN（不是数字）。
+
+
+
