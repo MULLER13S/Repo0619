@@ -1,0 +1,6 @@
+netstat -anb
+在运行里输入regsvr32 dll路径---------注册DLL；
+运行-》regedit;
+计算机->右键管理->服务
+开启服务 net start 服务名
+关闭服务 net stop 服务名

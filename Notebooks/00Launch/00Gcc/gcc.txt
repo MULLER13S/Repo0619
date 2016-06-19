@@ -1,0 +1,3 @@
+yum -y install gcc gcc-c++ kernel-devel
+
+gcc -std=c11 -o abc abc.c

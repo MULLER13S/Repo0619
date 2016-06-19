@@ -1,0 +1,8 @@
+1、window+R,输入cmd回车；
+2、cd/d F:\phpStudy\MySQL\bin;进入mysql.exe所在目录；
+3、mysql -uroot -proot;直接进入mysql命令行；
+4、select user,password from mysql.user;可以查看mysql系统用户表；
+5、打开我的电脑的属性，打开高级系统设置，点击环境变量，在Path中添加F:\phpStudy\MySQL\bin，即可在命令行全局
+   直接使用mysql命令；在直接使用mysql命令之前，先必须启动mysqld.exe服务；
+6、mysql -uroot -p  enter
+7、password:123456  enter

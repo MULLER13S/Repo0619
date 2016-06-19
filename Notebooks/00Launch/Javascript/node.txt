@@ -1,0 +1,3 @@
+下载nodejs,安装好后在shell里面就自动有node命令和npm命令了
+node -v;
+npm -v;

@@ -1,0 +1,15 @@
+1、找到mysql的安装目录，找到php.ini
+
+2、修改php.ini里面三个数据
+
+①upload_max_filesize
+
+②memory_limit
+
+③post_max_size
+
+数值大于你现在的数据库就行
+
+3、重启IIS，在开始菜单下》》运行》》输入CMD》》输入：iisreset /start
+
+备注：这三个步骤缺了任何一个都不成功

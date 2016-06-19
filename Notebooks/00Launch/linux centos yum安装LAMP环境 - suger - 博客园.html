@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)http://www.cnblogs.com/suger/p/3832093.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>linux centos yum安装LAMP环境 - suger - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./linux centos yum安装LAMP环境 - suger - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./linux centos yum安装LAMP环境 - suger - 博客园_files/bundle-darkgreentrip.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/suger/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/suger/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/suger/wlwmanifest.xml">
+<script async="" src="./linux centos yum安装LAMP环境 - suger - 博客园_files/analytics.js"></script><script src="./linux centos yum安装LAMP环境 - suger - 博客园_files/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'suger', cb_enable_mathjax=false;</script>
+<script src="./linux centos yum安装LAMP环境 - suger - 博客园_files/blog-common.js" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/suger/"><img id="blogLogo" src="./linux centos yum安装LAMP环境 - suger - 博客园_files/logo.gif" alt="返回主页"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/suger/">suger</a></h1>
+<h2>自强不息，厚德载物。</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="MyLinks1_HomeLink" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="MyLinks1_MyHomeLink" class="menu" href="http://www.cnblogs.com/suger/">首页</a></li>
+<li><a id="MyLinks1_NewPostLink" class="menu" rel="nofollow" href="http://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="MyLinks1_ContactLink" class="menu" rel="nofollow" href="http://msg.cnblogs.com/send/suger">联系</a></li>
+<li><a id="MyLinks1_Syndication" class="menu" href="http://www.cnblogs.com/suger/rss">订阅</a>
+<!--<a id="MyLinks1_XMLLink" class="aHeaderXML" href="http://www.cnblogs.com/suger/rss"><img src="http://www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="MyLinks1_Admin" class="menu" rel="nofollow" href="http://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			
+<!--done-->
+随笔- 58&nbsp;
+文章- 1&nbsp;
+评论- 42&nbsp;
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="./linux centos yum安装LAMP环境 - suger - 博客园_files/linux centos yum安装LAMP环境 - suger - 博客园.html">linux centos yum安装LAMP环境</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p><span style="font-size: 14px;">centos 6.5</span></p>
+<p><span style="font-size: 14px;">1.yum安装和源代码编译在使用的时候没啥区别，但是安装的过程就大相径庭了，yum只需要3个命令就可以完成，源代码需要13个包，还得加压编译，步骤很麻烦，而且当做有时候会出错，源代码编译安装大概需要2个小时，好处在于可以自己配置地址等一些参数，yum安装半个小时搞定，一般不会出错，更新也很方便。</span></p>
+<p><span style="font-size: 14px;">&nbsp;</span></p>
+<p><span style="font-size: 14px;">2.我的机器是centos release 5.9 64为的系统，一般机器都带yum命令，并且yum包源都是可以用的，就是说不用你自己下载东西，直接yum -y install 后面加上你所需要安装的软件，他会自动下载自动安装，非常方便。例如 yum -y install httpd自动下载并安装apache服务器。lamp环境只需要安装httpd,mysql,php</span></p>
+<p><span style="font-size: 14px;">&nbsp;</span></p>
+<p><span style="font-size: 14px;"><strong>3.首先更新一下yum -y update</strong></span></p>
+<p><span style="font-size: 14px;">&nbsp;</span></p>
+<p><span style="font-size: 14px;"><strong>4.用yum安装Apache,Mysql,PHP.</strong></span></p>
+<p><span style="font-size: 14px;">&nbsp;</span></p>
+<p><span style="font-size: 14px;">4.1安装Apache&nbsp;</span><br><span style="font-size: 14px;"><strong>yum install httpd httpd-devel</strong>&nbsp;</span><br><span style="font-size: 14px;">安装完成后，用<strong>/etc/init.d/httpd start</strong>&nbsp;启动apache&nbsp;</span><br><span style="font-size: 14px;">设为开机启动:<strong>chkconfig httpd on</strong></span></p>
+<p><br><span style="font-size: 14px;">4.2 安装mysql&nbsp;</span><br><span style="font-size: 14px;"><strong>yum install mysql mysql-server mysql-devel</strong>&nbsp;</span><br><span style="font-size: 14px;">同样，完成后，用<strong>/etc/init.d/mysqld start</strong>&nbsp;启动mysql</span></p>
+<p><br><span style="font-size: 14px;">4.3 设置mysql密码&nbsp;</span><br><span style="font-size: 14px;">mysql&gt;; USE mysql;&nbsp;</span><br><span style="font-size: 14px;">mysql&gt;; UPDATE user SET Password=PASSWORD('newpassword') WHERE user='root';&nbsp;</span><br><span style="font-size: 14px;">mysql&gt;; FLUSH PRIVILEGES;</span></p>
+<p><span style="font-size: 14px;">设置mysql密码还可以用：<strong>mysql_secure_installation</strong>&nbsp;命令</span></p>
+<p><span style="font-size: 14px;">&nbsp;</span></p>
+<p><br><span style="font-size: 14px;">4.4允许远程登录&nbsp;</span><br><span style="font-size: 14px;">mysql -u root -p&nbsp;</span><br><span style="font-size: 14px;">Enter Password: &lt;your new password&gt;&nbsp;</span><br><span style="font-size: 14px;">mysql&gt;GRANT ALL PRIVILEGES ON *.* TO '用户名'@'%' IDENTIFIED BY '密码' WITH GRANT OPTION;&nbsp;</span><br><span style="font-size: 14px;">完成后就能用mysql-front远程管理mysql了。&nbsp;</span><br><span style="font-size: 14px;">设为开机启动&nbsp;</span><br><span style="font-size: 14px;"><strong>chkconfig mysqld on</strong></span></p>
+<p><br><span style="font-size: 14px;">4.5安装php&nbsp;</span><br><span style="font-size: 14px;"><strong>yum install php php-mysql php-common php-gd php-mbstring php-mcrypt php-devel php-xml</strong>&nbsp;</span><br><span style="font-size: 14px;"><strong>/etc/init.d/httpd start</strong></span></p>
+<p><br><span style="font-size: 14px;">5. 测试一下&nbsp;</span><br><span style="font-size: 14px;">在/var/www/html/新建个test.php文件，将以下内容写入，然后保存。&nbsp;</span><br><span style="font-size: 14px;">&lt;?&nbsp;</span><br><span style="font-size: 14px;">phpinfo();&nbsp;</span><br><span style="font-size: 14px;">?&gt;&nbsp;</span><br><span style="font-size: 14px;">防火墙配置&nbsp;</span><br><span style="font-size: 14px;">a.添加.允许访问端口{80: http}.&nbsp;</span><br><span style="font-size: 14px;">-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT</span><br><span style="font-size: 14px;">b.关闭防火墙{不推荐}.&nbsp;</span><br><span style="font-size: 14px;">service iptables stop&nbsp;</span><br><span style="font-size: 14px;">c.重置加载防火墙&nbsp;</span><br><span style="font-size: 14px;">service iptables restart</span></p>
+<p><br><span style="font-size: 14px;">6. 然后在客户端浏览器里打开http://serverip/test.php，若能成功显示，则表示安装成功。&nbsp;</span><br><span style="font-size: 14px;">至此，安装完毕。</span></p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/suger/category/593409.html">Linux</a></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+<a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(3832093,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+<a id="green_channel_follow" onclick="c_follow();" href="javascript:void(0);">关注我</a>
+<a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a><a id="green_channel_contact" href="http://msg.cnblogs.com/send/suger" target="_blank">联系我</a>
+<a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./linux centos yum安装LAMP环境 - suger - 博客园_files/icon_weibo_24.png" alt=""></a>
+<a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./linux centos yum安装LAMP环境 - suger - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+<div id="author_profile_info" class="author_profile_info">
+<a href="http://home.cnblogs.com/u/suger/" target="_blank"><img src="./linux centos yum安装LAMP环境 - suger - 博客园_files/20150428130152.png" class="author_avatar" alt=""></a>
+<div id="author_profile_detail" class="author_profile_info">
+<a href="http://home.cnblogs.com/u/suger/">suger</a><br>
+<a href="http://home.cnblogs.com/u/suger/followees">关注 - 18</a><br>
+<a href="http://home.cnblogs.com/u/suger/followers">粉丝 - 33</a>
+</div>
+</div>
+<div class="clear"></div>
+<div id="author_profile_honor"></div>
+<div id="author_profile_follow">
+    <a href="javascript:void(0);" onclick="c_follow();return false;">+加关注</a>
+</div>
+</div>
+<div id="div_digg">										
+    <div class="diggit" onclick="votePost(3832093,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">0</span>
+    </div>
+	<div class="buryit" onclick="votePost(3832093,&#39;Bury&#39;)"> 
+		<span class="burynum" id="bury_count">0</span>
+	</div>
+	<div class="clear"></div>	
+	<div class="diggword" id="digg_tips">
+    (请您对文章做出评价)
+    </div>	
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/suger/p/3831946.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/suger/p/3831946.html" title="发布于2014-07-08 17:33">Linux 用户和组的 添加/删除</a><br><a href="http://www.cnblogs.com/suger/p/4022000.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/suger/p/4022000.html" title="发布于2014-10-13 13:06">JQuery 实现下拉列表选中</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2014-07-08 18:40</span> <a href="http://www.cnblogs.com/suger/">suger</a> 阅读(<span id="post_view_count">8785</span>) 评论(<span id="post_comment_count">0</span>)  <a href="http://i.cnblogs.com/EditPosts.aspx?postid=3832093" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/suger/p/3832093.html#" onclick="AddToWz(3832093);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,isLogined=false,cb_blogId=41360,cb_entryId=3832093,cb_blogApp=currentBlogApp,cb_blogUserGuid='dd4a420b-63cf-dd11-9e4d-001cf0cd104b',cb_entryCreatedDate='2014/7/8 18:40:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/suger/p/3832093.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/suger/p/3832093.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="http://www.rongcloud.cn/" target="_blank">【推荐】融云即时通讯云－专注为 App 开发者提供IM云服务</a><br><a href="http://click.aliyun.com/m/3037/" target="_blank">【阿里云SSD云盘】速度行业领先</a><br></div>
+<div id="opt_under_post"></div>
+<div id="ad_c1" class="c_ad_block"><a href="http://job.cnblogs.com/offer/51018/" target="_blank"><img width="300" height="250" src="./linux centos yum安装LAMP环境 - suger - 博客园_files/35695-20160215151750532-1876432241.png" alt="招聘ASP.NET 5开发工程师" title="招聘ASP.NET 5开发工程师"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/539799/" target="_blank">卡西尼号探测器精确测量土卫六表面温度</a><br> ·  <a href="http://news.cnblogs.com/n/539801/" target="_blank">究竟哪款iPhone使用人数最多？结果不出所料</a><br> ·  <a href="http://news.cnblogs.com/n/539800/" target="_blank">链家的“罪”，你们个个还在犯</a><br> ·  <a href="http://news.cnblogs.com/n/539798/" target="_blank">美国科学家提议在太空飞船种植转基因植物</a><br> ·  <a href="http://news.cnblogs.com/n/539797/" target="_blank">大佬门徒：那些被马云看好的年轻人</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="ad_c2" class="c_ad_block"><a href="https://www.jpush.cn/?from=cnblogs01" target="_blank"><img width="468" height="60" src="./linux centos yum安装LAMP环境 - suger - 博客园_files/24442-20160226161816318-1782390681.jpg" alt="极光推送_2016年3月份推广" title="极光推送_2016年3月份推广"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/538249/" target="_blank">谷歌背后的数学</a><br> ·  <a href="http://kb.cnblogs.com/page/533808/" target="_blank">Medium开发团队谈架构设计</a><br> ·  <a href="http://kb.cnblogs.com/page/539274/" target="_blank">理解“渐进增强(Progressive Enhancement)”</a><br> ·  <a href="http://kb.cnblogs.com/page/534571/" target="_blank">为什么说DOM操作很慢</a><br> ·  <a href="http://kb.cnblogs.com/page/527518/" target="_blank">为什么你应该尝试全栈</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+$(function () {
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);    
+});
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/suger/">suger</a><br>园龄：<a href="http://home.cnblogs.com/u/suger/" title="入园时间：2008-08-03">7年6个月</a><br>粉丝：<a href="http://home.cnblogs.com/u/suger/followers/">33</a><br>关注：<a href="http://home.cnblogs.com/u/suger/followees/">18</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="cnblogs.UserManager.FollowBlogger(&#39;dd4a420b-63cf-dd11-9e4d-001cf0cd104b&#39;)">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+
+</div>
+</div>
+
+</div><div id="sidebar_toptags" class="sidebar-block">
+<div class="catListTag">
+<h3 class="catListTitle">我的标签</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/suger/tag/PHP/">PHP</a>(1)</li>
+</ul>
+</div></div><div id="sidebar_categories">
+<div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+<h3 class="catListTitle">随笔分类<span style="font-size:11px;font-weight:normal">(57)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/suger/category/315006.html">.NET/C#(14)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/suger/category/315007.html">Javascript(8)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/suger/category/593409.html">Linux(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/suger/category/593411.html">php(6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/suger/category/315008.html">SQL Server(6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="http://www.cnblogs.com/suger/category/593426.html">缓存(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="http://www.cnblogs.com/suger/category/315576.html">其它(18)</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+<h3 class="catListTitle">随笔档案<span style="font-size:11px;font-weight:normal">(58)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="http://www.cnblogs.com/suger/archive/2015/02.html">2015年2月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_1" href="http://www.cnblogs.com/suger/archive/2014/10.html">2014年10月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_2" href="http://www.cnblogs.com/suger/archive/2014/07.html">2014年7月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_3" href="http://www.cnblogs.com/suger/archive/2013/12.html">2013年12月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_4" href="http://www.cnblogs.com/suger/archive/2013/10.html">2013年10月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_5" href="http://www.cnblogs.com/suger/archive/2013/02.html">2013年2月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_6" href="http://www.cnblogs.com/suger/archive/2013/01.html">2013年1月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_7" href="http://www.cnblogs.com/suger/archive/2012/12.html">2012年12月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_8" href="http://www.cnblogs.com/suger/archive/2012/09.html">2012年9月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_9" href="http://www.cnblogs.com/suger/archive/2012/05.html">2012年5月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_10" href="http://www.cnblogs.com/suger/archive/2012/01.html">2012年1月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_11" href="http://www.cnblogs.com/suger/archive/2011/11.html">2011年11月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_12" href="http://www.cnblogs.com/suger/archive/2011/10.html">2011年10月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_13" href="http://www.cnblogs.com/suger/archive/2011/09.html">2011年9月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_14" href="http://www.cnblogs.com/suger/archive/2011/08.html">2011年8月 (13)</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_articlecategory" class="catListArticleCategory sidebar-block">
+<h3 class="catListTitle">文章分类</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_2_Link_0" href="http://www.cnblogs.com/suger/category/593410.html">php</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/suger/p/4274610.html#3359112">1. Re:SQL Server 2012 复制（发布订阅的研究）</a></li>
+    <li class="recent_comment_body">有没有试过数据库不用默认的1433端口，用自定义端口，还能否实现订阅。<br>我用的自定义端口，无论怎么设置都无法订阅</li>
+    <li class="recent_comment_author">--灯火蓝衫</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/suger/p/4024246.html#3315205">2. Re:ThinkPHP 分页实现</a></li>
+    <li class="recent_comment_body">怎么TP3.2 没有&lt;b&gt;%LIST_ROW%&lt;/b&gt;参数  LZ 你的有吗？</li>
+    <li class="recent_comment_author">--激情@人生</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/suger/archive/2012/05/13/2498248.html#3308297">3. Re:C#扩展方法的理解</a></li>
+    <li class="recent_comment_body">有用，学习了！</li>
+    <li class="recent_comment_author">--日增一土</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/suger/archive/2012/05/13/2498248.html#3276958">4. Re:C#扩展方法的理解</a></li>
+    <li class="recent_comment_body">写的不错，通俗易懂</li>
+    <li class="recent_comment_author">--Func&amp;lt;in,out&amp;gt;</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/suger/p/4274610.html#3267292">5. Re:SQL Server 2012 复制（发布订阅的研究）</a></li>
+    <li class="recent_comment_body">很宝贵的经验。</li>
+    <li class="recent_comment_author">--上山打老虎</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/suger/archive/2012/05/13/2498248.html">1. C#扩展方法的理解(28170)</a></li><li><a href="http://www.cnblogs.com/suger/p/4024246.html">2. ThinkPHP 分页实现(12989)</a></li><li><a href="./linux centos yum安装LAMP环境 - suger - 博客园_files/linux centos yum安装LAMP环境 - suger - 博客园.html">3. linux centos yum安装LAMP环境(8785)</a></li><li><a href="http://www.cnblogs.com/suger/archive/2011/09/06/2168319.html">4. memcached stats 命令(5726)</a></li><li><a href="http://www.cnblogs.com/suger/p/4024997.html">5. ThinkPHP导入Excel文件（使用PHPExcel）(4906)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="http://www.cnblogs.com/suger/archive/2012/05/13/2498248.html">1. C#扩展方法的理解(15)</a></li><li><a href="http://www.cnblogs.com/suger/archive/2011/11/04/2235682.html">2. c# ListView 虚拟模式 相关操作(8)</a></li><li><a href="http://www.cnblogs.com/suger/p/4274610.html">3. SQL Server 2012 复制（发布订阅的研究）(6)</a></li><li><a href="http://www.cnblogs.com/suger/p/4024246.html">4. ThinkPHP 分页实现(4)</a></li><li><a href="http://www.cnblogs.com/suger/p/4024997.html">5. ThinkPHP导入Excel文件（使用PHPExcel）(2)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/suger/archive/2012/05/13/2498248.html">1. C#扩展方法的理解(26)</a></li><li><a href="http://www.cnblogs.com/suger/p/3468152.html">2. IIS 7.5 配置 php 5.4.22 链接 sql 2008（用PDO链接数据库）(6)</a></li><li><a href="http://www.cnblogs.com/suger/p/4024246.html">3. ThinkPHP 分页实现(5)</a></li><li><a href="http://www.cnblogs.com/suger/p/4022000.html">4. JQuery 实现下拉列表选中(2)</a></li><li><a href="http://www.cnblogs.com/suger/p/3454735.html">5. C# Memcached 缓存(2)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2016 suger
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+</body></html>

@@ -1,0 +1,32 @@
+1---在config文件中组件中配置authManager:
+'components'=>[
+	'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'itemTable' => 'auth_item',
+            'assignmentTable' => 'auth_assignment',
+            'itemChildTable' => 'auth_item_child',
+            'ruleTable'=>'auth_rule',
+
+					],
+				]	
+
+2---在./config/console.php中同样需要配置如上：
+
+
+
+Problem was quite simple: The configuration was not used. 
+yii migrate is a console command and usually the configuration for such commands is placed in a seperated file.
+
+In case of yii2-app-base template, 
+from which I have created my application, 
+there is a config/console.php configuration file where the authManager needs to be declared. 
+It is not sufficient to have it in the config/web.php declared only.
+
+In case of yii2-app-advanced the authManager should be declared in console/config/main.php 
+and not in the backend or frontend configuration files.			
+	
+3---在windows环境下，进入yii根目录，运行yii.bat。然后打开cmd，进入根目录，也就是yii.bat所在的目录：
+F:\phpStudy\WWW\Yiichina\Yiichina;
+执行数据库迁移命令：yii migrate --migrationPath=@yii/rbac/migrations；
+这样会在数据库中生成auth_assignment,auth_item,auth_item_child,auth_rule和migration五张表；
+
