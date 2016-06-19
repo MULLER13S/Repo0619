@@ -1,0 +1,1 @@
+Composer文件夹放在C:\Users\Administrator\AppData\Roaming\Composer路径；

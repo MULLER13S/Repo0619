@@ -1,0 +1,9 @@
+1--把bin路径复制到系统环境变量中；
+2--把/msys/1.0/msys.bat创建快捷方式；
+3-修改/msys/1.0/etc/profile文件，在最后以后添加：
+export PATH=/d/ProgamFiles1024/Mingw/bin:$PATH
+
+
+$ gcc -std=c99 -o oop abc.c hotel.c
+
+
